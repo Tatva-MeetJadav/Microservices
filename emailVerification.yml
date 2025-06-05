@@ -1,0 +1,354 @@
+openapi: 3.0.3
+info:
+  title: Email Verification API (IPQS)
+  version: 1.0.0
+  description: |
+    This API verifies the validity, risk, and deliverability of an email address using IPQS.
+servers:
+  - url: https://microservices.com/v1
+paths:
+  /email/verify:
+    post:
+      summary: Verify and score an email address
+      description: Verifies an email address for validity, risk, and deliverability, returning a detailed response object.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EmailVerificationRequest"
+      responses:
+        "200":
+          description: Email verification result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmailVerificationResponse"
+        "400":
+          description: Bad Request. The request was invalid or missing required parameters.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              example:
+                success: false
+                message: "Missing required parameter: email"
+                errors: ["Parameter 'email' is required."]
+        "500":
+          description: Internal Server Error. An unexpected error occurred on the server.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              example:
+                success: false
+                message: "A server error occurred. Please try again later."
+                errors: ["Internal server error."]
+        "503":
+          description: Service Unavailable. The service is temporarily unavailable.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              example:
+                success: false
+                message: "The service is temporarily unavailable. Please try again later."
+                errors: ["Service unavailable."]
+        "404":
+          description: Not Found. The requested resource or endpoint does not exist.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: string
+              example:
+                success: false
+                message: "Endpoint not found."
+                errors: ["The requested endpoint does not exist."]
+
+components:
+  schemas:
+    EmailVerificationRequest:
+      type: object
+      required:
+        - email
+        - api_key
+      properties:
+        email:
+          type: string
+          description: Email address to be verified.
+        api_key:
+          type: string
+          description: IPQS API key.
+
+    EmailVerificationResponse:
+      type: object
+      properties:
+        valid:
+          type: boolean
+          description: Indicates if the email address is valid (true/false).
+        timed_out:
+          type: boolean
+          description: True if the email server did not respond within the expected time.
+        disposable:
+          type: boolean
+          description: True if the email is from a temporary/disposable email provider.
+        first_name:
+          type: string
+          description: First name associated with the email address, if available.
+        deliverability:
+          type: string
+          enum: [high, medium, low]
+          description: Likelihood that emails will be delivered to this address (e.g., high, medium, low).
+        smtp_score:
+          type: integer
+          enum: [-1, 0, 1, 2, 3]
+          description: Numeric score showing how well the email server responds to SMTP checks.
+        overall_score:
+          type: integer
+          enum: [0, 1, 2, 3, 4]
+          description: General risk score for the email address, typically lower is better.
+        catch_all:
+          type: boolean
+          description: True if the domain is a 'catch-all' and accepts all emails sent to it.
+        generic:
+          type: boolean
+          description: True if the email is a generic address (e.g., info@, support@).
+        common:
+          type: boolean
+          description: True if the email address is common or frequently used.
+        dns_valid:
+          type: boolean
+          description: True if the domain has valid DNS records for email.
+        honeypot:
+          type: boolean
+          description: True if the email is identified as a spam trap/honeypot.
+        frequent_complainer:
+          type: boolean
+          description: True if this address is known to frequently mark emails as spam.
+        suspect:
+          type: boolean
+          description: True if the email is suspected to be risky, fraudulent, or problematic.
+        recent_abuse:
+          type: boolean
+          description: True if the email has recently been involved in abuse or spam activity.
+        identity_data:
+          type: object
+          description: Identity and enrichment information associated with the email address.
+          properties:
+            names:
+              type: object
+              description: An object containing names associated with the email address.
+              properties:
+                first_name:
+                  type: string
+                  description: Their first name.
+                last_name:
+                  type: string
+                  description: Their last name.
+                middle_name:
+                  type: string
+                  description: Their middle name.
+            addresses:
+              type: object
+              description: An object containing physical addresses associated with the email address.
+              properties:
+                address:
+                  type: string
+                  description: The street address.
+                city:
+                  type: string
+                  description: The city.
+                region:
+                  type: string
+                  description: The state or region.
+                postal_code:
+                  type: string
+                  description: The postal code.
+                country:
+                  type: string
+                  description: The country.
+            email_addresses:
+              type: object
+              description: An object containing other email addresses associated with the email address.
+              properties:
+                email:
+                  type: string
+                  description: The email address.
+                first_seen:
+                  type: string
+                  format: date-time
+                  description: When the email address was first created.
+                last_seen:
+                  type: string
+                  format: date-time
+                  description: When the email address was last used.
+            phone_numbers:
+              type: object
+              description: An object containing phone numbers associated with the email address.
+              properties:
+                formatted_phone_number:
+                  type: string
+                  description: The full phone number, including country code.
+                country:
+                  type: string
+                  description: The country associated with the phone number.
+            age:
+              type: object
+              description: An object containing ages of people associated with the email address.
+              properties:
+                human:
+                  type: integer
+                  description: How many years old the person is.
+                birthday_iso:
+                  type: string
+                  format: date-time
+                  description: Their date of birth in ISO format.
+                birthday_timestamp:
+                  type: integer
+                  description: Their birthday in timestamp format.
+                birthdate_certainty:
+                  type: boolean
+                  description: Whether we are certain the birthdate is correct.
+        fraud_score:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Numeric score (usually 0-100) representing the risk of fraud for this email.
+        leaked:
+          type: boolean
+          description: True if this email address has appeared in data leaks or breaches.
+        suggested_domain:
+          type: string
+          description: Alternative domain suggestion if the original domain might be a typo.
+        domain_velocity:
+          type: string
+          enum: [high, medium, low, none]
+          description: Indicates how quickly the domain is being used/registered (e.g., high for many new accounts at once).
+        domain_trust:
+          type: string
+          enum: [trusted, positive, neutral, suspicious, malicious, not rated]
+          description: Level of trust for the domain (e.g., trusted, untrusted).
+        user_activity:
+          type: string
+          enum: [high, medium, low, none]
+          description: Level of past user activity associated with this email (high, medium, low).
+        associated_names:
+          type: object
+          description: Names associated with the email address (may require higher subscription).
+          properties:
+            status:
+              type: string
+              description: Status of data availability (e.g., "Enterprise Plus or higher required.").
+            names:
+              type: array
+              items:
+                type: string
+              description: List of associated names.
+        associated_phone_numbers:
+          type: object
+          description: Phone numbers associated with the email address (may require higher subscription).
+          properties:
+            status:
+              type: string
+              description: Status of data availability (e.g., "Enterprise Plus or higher required.").
+            phone_numbers:
+              type: array
+              items:
+                type: string
+              description: List of associated phone numbers.
+        first_seen:
+          type: object
+          description: When this email was first detected by the service.
+          properties:
+            human:
+              type: string
+              description: Human-readable representation of when first seen.
+            timestamp:
+              type: integer
+              description: Unix timestamp of when first seen.
+            iso:
+              type: string
+              format: date-time
+              description: ISO 8601 date/time of when first seen.
+        domain_age:
+          type: object
+          description: Data on when the domain was first registered or seen.
+          properties:
+            human:
+              type: string
+              description: Human-readable representation of domain age.
+            timestamp:
+              type: integer
+              description: Unix timestamp of domain age.
+            iso:
+              type: string
+              format: date-time
+              description: ISO 8601 date/time of domain age.
+        success:
+          type: boolean
+          description: True if the API request was completed successfully.
+        spam_trap_score:
+          type: string
+          enum: [high, medium, low, none]
+          description: Indicates spam trap risk (e.g., none, low, medium, high).
+        risky_tld:
+          type: boolean
+          description: True if the top-level domain (TLD) is considered risky (e.g., .xyz, .top).
+        spf_record:
+          type: boolean
+          description: True if the domain has a valid SPF (Sender Policy Framework) record.
+        dmarc_record:
+          type: boolean
+          description: True if the domain has a valid DMARC record.
+        sanitized_email:
+          type: string
+          description: The standardized/cleaned version of the input email address.
+        mx_records:
+          type: array
+          items:
+            type: string
+          description: List of mail exchange (MX) servers for the domain.
+        request_id:
+          type: string
+          description: Unique identifier for this API request, useful for troubleshooting.
+        a_records:
+          type: array
+          items:
+            type: string
+          description: List of A (address) records for the domain, representing IP addresses.
