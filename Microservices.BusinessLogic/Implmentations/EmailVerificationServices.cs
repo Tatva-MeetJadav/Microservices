@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microservices.BusinessLogic.Dto;
 using Microservices.BusinessLogic.Interfaces;
 using Microservices.Models;
 using Microsoft.Extensions.Configuration;
@@ -20,8 +21,8 @@ namespace Microservices.BusinessLogic
         public EmailVerificationServices(IConfiguration configuration, HttpClient httpClient)
         {
             _httpClient = httpClient;
-            _apiKey = configuration["IPQS:ApiKey"]??string.Empty;
-            _baseUrl = configuration["IPQS:BaseUrl"]??string.Empty;
+            _apiKey = configuration["IPQS:ApiKey"] ?? string.Empty;
+            _baseUrl = configuration["IPQS:BaseUrl"] ?? string.Empty;
         }
         public async Task<EmailVerificationAPIResponse> VerifyEmailAsync(EmailVerificationRequest request)
         {
@@ -36,7 +37,7 @@ namespace Microservices.BusinessLogic
             httpResponse.EnsureSuccessStatusCode();
             var jsonResult = await httpResponse.Content.ReadAsStringAsync();
             EmailVerificationAPIResponse result = new();
-            
+
             if (!string.IsNullOrEmpty(jsonResult))
             {
                 var settings = new JsonSerializerSettings
@@ -46,20 +47,20 @@ namespace Microservices.BusinessLogic
                         NamingStrategy = new Newtonsoft.Json.Serialization.SnakeCaseNamingStrategy()
                     }
                 };
-                EmailVerificationResponse deserilizedResult = JsonConvert.DeserializeObject<EmailVerificationResponse>(
-                  jsonResult,settings
-                  ) 
-                  ?? new EmailVerificationResponse();
-                result = new EmailVerificationAPIResponse
-                {
-                    ApiResponse = new APIResponse
-                    {
-                        Success = true,
-                        Errors = null,
-                        Message = "Email verification process completed."
-                    },
-                    Result = deserilizedResult
-                };
+                EmailVerificationDto deserilizedResult = JsonConvert.DeserializeObject<EmailVerificationDto>(
+                  jsonResult, settings
+                  )
+                  ?? new EmailVerificationDto();
+                // result = new EmailVerificationAPIResponse
+                // {
+                //     ApiResponse = new APIResponse
+                //     {
+                //         Success = true,
+                //         Errors = null,
+                //         Message = "Email verification process completed."
+                //     },
+                //     Result = deserilizedResult
+                // };
             }
             return result;
         }
