@@ -71,15 +71,10 @@ components:
       type: object
       required:
         - email
-        - apiKey
       properties:
         email:
           type: string
           description: Email address to be verified.
-        apiKey:
-          type: string
-          description: IPQS API key.
-
     EmailVerificationResponse:
       type: object
       properties:
