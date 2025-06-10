@@ -44,26 +44,6 @@ paths:
                 success: false
                 message: "A server error occurred. Please try again later."
                 errors: ["Internal server error."]
-        "503":
-          description: Service Unavailable. The service is temporarily unavailable.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/APIResponse"
-              example:
-                success: false
-                message: "The service is temporarily unavailable. Please try again later."
-                errors: ["Service unavailable."]
-        "404":
-          description: Not Found. The requested resource or endpoint does not exist.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/APIResponse"
-              example:
-                success: false
-                message: "Endpoint not found."
-                errors: ["The requested endpoint does not exist."]
 
 components:
   schemas:

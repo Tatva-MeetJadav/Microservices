@@ -31,6 +31,7 @@ namespace Microservices.Models
         /// </summary>
         /// <value>Email address to be verified.</value>
         [Required]
+        [EmailAddress]
         [DataMember(Name="email", EmitDefaultValue=false)]
         public string Email { get; set; }
 
