@@ -62,36 +62,6 @@
               }
             },
             "description" : "Internal Server Error. An unexpected error occurred on the server."
-          },
-          "503" : {
-            "content" : {
-              "application/json" : {
-                "example" : {
-                  "success" : false,
-                  "message" : "The service is temporarily unavailable. Please try again later.",
-                  "errors" : [ "Service unavailable." ]
-                },
-                "schema" : {
-                  "$ref" : "#/components/schemas/APIResponse"
-                }
-              }
-            },
-            "description" : "Service Unavailable. The service is temporarily unavailable."
-          },
-          "404" : {
-            "content" : {
-              "application/json" : {
-                "example" : {
-                  "success" : false,
-                  "message" : "Endpoint not found.",
-                  "errors" : [ "The requested endpoint does not exist." ]
-                },
-                "schema" : {
-                  "$ref" : "#/components/schemas/APIResponse"
-                }
-              }
-            },
-            "description" : "Not Found. The requested resource or endpoint does not exist."
           }
         },
         "summary" : "Verify and score an email address"

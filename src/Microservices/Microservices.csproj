@@ -9,12 +9,14 @@
         <Version>1.0.0</Version>
         <AssemblyName>Microservices</AssemblyName>
         <PackageId>Microservices</PackageId>
-        <UserSecretsId>8c913fa2-b053-4bf7-9a58-d3c0db36bce7</UserSecretsId>
+        <UserSecretsId>5d0fc30d-7150-4409-b995-9ccd29e79ba1</UserSecretsId>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
         <DockerfileContext>..\..</DockerfileContext>
     </PropertyGroup>
     <ItemGroup>
         <ProjectReference Include="../Microservices.Models/Microservices.Models.csproj" />
+        <ProjectReference Include="..\..\Microservices.BusinessLogic\Microservices.BusinessLogic.csproj" />
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
         <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.8" />
         <PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="6.4.0" />
         <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.4.0" />

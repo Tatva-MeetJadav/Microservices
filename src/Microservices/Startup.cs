@@ -24,6 +24,8 @@ using Microservices.Authentication;
 using Microservices.Filters;
 using Microservices.OpenApi;
 using Microservices.Formatters;
+using Microservices.BusinessLogic.Interfaces;
+using Microservices.BusinessLogic;
 
 namespace Microservices
 {
@@ -99,6 +101,11 @@ namespace Microservices
                 });
                 services
                     .AddSwaggerGenNewtonsoftSupport();
+                services.AddAutoMapper(typeof(EmailVerificationProfile).Assembly);
+
+                //Including services
+                services.AddScoped<IEmailVerificationServices, EmailVerificationServices>();
+                services.AddHttpClient<EmailVerificationServices>();
         }
 
         /// <summary>

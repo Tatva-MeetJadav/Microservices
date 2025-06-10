@@ -127,7 +127,12 @@ namespace Microservices.Models
             return !Equals(left, right);
         }
 
-        #pragma warning restore 1591
+        public static implicit operator EmailVerificationAPIResponse(EmailVerificationResponse v)
+        {
+            throw new NotImplementedException();
+        }
+
+#pragma warning restore 1591
         #endregion Operators
     }
 }

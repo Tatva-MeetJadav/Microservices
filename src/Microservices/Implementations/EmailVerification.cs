@@ -17,6 +17,11 @@ namespace Microservices.Controllers
             _emailVerificationService = emailVerificationService;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public override async Task<IActionResult> EmailVerifyPost([FromBody] EmailVerificationRequest request)
         {
             if (request == null || string.IsNullOrWhiteSpace(request.Email))
