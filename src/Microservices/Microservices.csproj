@@ -9,7 +9,7 @@
         <Version>1.0.0</Version>
         <AssemblyName>Microservices</AssemblyName>
         <PackageId>Microservices</PackageId>
-        <UserSecretsId>345c443b-c536-4d9a-8f0b-b36a20f191f8</UserSecretsId>
+        <UserSecretsId>8c913fa2-b053-4bf7-9a58-d3c0db36bce7</UserSecretsId>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
         <DockerfileContext>..\..</DockerfileContext>
     </PropertyGroup>

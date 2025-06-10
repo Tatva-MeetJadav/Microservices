@@ -102,20 +102,15 @@
     "schemas" : {
       "EmailVerificationRequest" : {
         "example" : {
-          "apiKey" : "apiKey",
           "email" : "email"
         },
         "properties" : {
           "email" : {
             "description" : "Email address to be verified.",
             "type" : "string"
-          },
-          "apiKey" : {
-            "description" : "IPQS API key.",
-            "type" : "string"
           }
         },
-        "required" : [ "apiKey", "email" ],
+        "required" : [ "email" ],
         "type" : "object"
       },
       "EmailVerificationResponse" : {
