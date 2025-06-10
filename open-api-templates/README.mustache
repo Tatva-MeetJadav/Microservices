@@ -1,7 +1,8 @@
-# Microservices - ASP.NET Core 7.0 Server
+# {{packageName}} - ASP.NET Core {{aspnetCoreVersion}} Server
 
-This API verifies the validity, risk, and deliverability of an email address using IPQS.
-
+{{#appDescriptionWithNewLines}}
+{{{.}}}
+{{/appDescriptionWithNewLines}}
 
 ## Upgrade NuGet Packages
 
@@ -42,10 +43,12 @@ Windows:
 ```
 build.bat
 ```
+{{^isLibrary}}
 ## Run in Docker
 
 ```
-cd src/Microservices
-docker build -t microservices .
-docker run -p 5000:8080 microservices
+cd {{sourceFolder}}/{{packageName}}
+docker build -t {{dockerTag}} .
+docker run -p 5000:8080 {{dockerTag}}
 ```
+{{/isLibrary}}

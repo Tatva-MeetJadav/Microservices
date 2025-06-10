@@ -5,9 +5,9 @@ info:
   description: |
     This API verifies the validity, risk, and deliverability of an email address using IPQS.
 servers:
-  - url: https://microservices.com/v1
+  - url: https://microservices.com
 paths:
-  /email/verify:
+  /emailVerify:
     post:
       summary: Verify and score an email address
       description: Verifies an email address for validity, risk, and deliverability, returning a detailed response object.
@@ -16,29 +16,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/emailVerificationRequest"
+              $ref: "#/components/schemas/EmailVerificationRequest"
       responses:
         "200":
           description: Email verification result
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/emailVerificationResponse"
+                $ref: "#/components/schemas/EmailVerificationAPIResponse"
         "400":
           description: Bad Request. The request was invalid or missing required parameters.
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                  message:
-                    type: string
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "#/components/schemas/APIResponse"
               example:
                 success: false
                 message: "Missing required parameter: email"
@@ -48,16 +39,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                  message:
-                    type: string
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "#/components/schemas/APIResponse"
               example:
                 success: false
                 message: "A server error occurred. Please try again later."
@@ -67,16 +49,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                  message:
-                    type: string
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "#/components/schemas/APIResponse"
               example:
                 success: false
                 message: "The service is temporarily unavailable. Please try again later."
@@ -86,16 +59,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                  message:
-                    type: string
-                  errors:
-                    type: array
-                    items:
-                      type: string
+                $ref: "#/components/schemas/APIResponse"
               example:
                 success: false
                 message: "Endpoint not found."
@@ -103,7 +67,7 @@ paths:
 
 components:
   schemas:
-    emailVerificationRequest:
+    EmailVerificationRequest:
       type: object
       required:
         - email
@@ -116,7 +80,7 @@ components:
           type: string
           description: IPQS API key.
 
-    emailVerificationResponse:
+    EmailVerificationResponse:
       type: object
       properties:
         valid:
@@ -352,3 +316,21 @@ components:
           items:
             type: string
           description: List of A (address) records for the domain, representing IP addresses.
+    APIResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: string
+    EmailVerificationAPIResponse:
+      type: object
+      properties:
+        result:
+          $ref: "#/components/schemas/EmailVerificationResponse"
+        apiResponse:
+          $ref: "#/components/schemas/APIResponse"

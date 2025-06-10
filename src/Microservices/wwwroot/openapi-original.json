@@ -1,0 +1,744 @@
+{
+  "openapi" : "3.0.3",
+  "info" : {
+    "description" : "This API verifies the validity, risk, and deliverability of an email address using IPQS.\n",
+    "title" : "Email Verification API (IPQS)",
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "https://microservices.com"
+  } ],
+  "paths" : {
+    "/emailVerify" : {
+      "post" : {
+        "description" : "Verifies an email address for validity, risk, and deliverability, returning a detailed response object.",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/EmailVerificationRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EmailVerificationAPIResponse"
+                }
+              }
+            },
+            "description" : "Email verification result"
+          },
+          "400" : {
+            "content" : {
+              "application/json" : {
+                "example" : {
+                  "success" : false,
+                  "message" : "Missing required parameter: email",
+                  "errors" : [ "Parameter 'email' is required." ]
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/APIResponse"
+                }
+              }
+            },
+            "description" : "Bad Request. The request was invalid or missing required parameters."
+          },
+          "500" : {
+            "content" : {
+              "application/json" : {
+                "example" : {
+                  "success" : false,
+                  "message" : "A server error occurred. Please try again later.",
+                  "errors" : [ "Internal server error." ]
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/APIResponse"
+                }
+              }
+            },
+            "description" : "Internal Server Error. An unexpected error occurred on the server."
+          },
+          "503" : {
+            "content" : {
+              "application/json" : {
+                "example" : {
+                  "success" : false,
+                  "message" : "The service is temporarily unavailable. Please try again later.",
+                  "errors" : [ "Service unavailable." ]
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/APIResponse"
+                }
+              }
+            },
+            "description" : "Service Unavailable. The service is temporarily unavailable."
+          },
+          "404" : {
+            "content" : {
+              "application/json" : {
+                "example" : {
+                  "success" : false,
+                  "message" : "Endpoint not found.",
+                  "errors" : [ "The requested endpoint does not exist." ]
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/APIResponse"
+                }
+              }
+            },
+            "description" : "Not Found. The requested resource or endpoint does not exist."
+          }
+        },
+        "summary" : "Verify and score an email address"
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "EmailVerificationRequest" : {
+        "example" : {
+          "apiKey" : "apiKey",
+          "email" : "email"
+        },
+        "properties" : {
+          "email" : {
+            "description" : "Email address to be verified.",
+            "type" : "string"
+          },
+          "apiKey" : {
+            "description" : "IPQS API key.",
+            "type" : "string"
+          }
+        },
+        "required" : [ "apiKey", "email" ],
+        "type" : "object"
+      },
+      "EmailVerificationResponse" : {
+        "example" : {
+          "deliverability" : "high",
+          "catchAll" : true,
+          "associatedNames" : {
+            "names" : [ "names", "names" ],
+            "status" : "status"
+          },
+          "frequentComplainer" : true,
+          "associatedPhoneNumbers" : {
+            "phoneNumbers" : [ "phoneNumbers", "phoneNumbers" ],
+            "status" : "status"
+          },
+          "leaked" : true,
+          "spamTrapScore" : "high",
+          "sanitizedEmail" : "sanitizedEmail",
+          "identityData" : {
+            "addresses" : {
+              "country" : "country",
+              "address" : "address",
+              "city" : "city",
+              "postalCode" : "postalCode",
+              "region" : "region"
+            },
+            "names" : {
+              "firstName" : "firstName",
+              "lastName" : "lastName",
+              "middleName" : "middleName"
+            },
+            "emailAddresses" : {
+              "lastSeen" : "2000-01-23T04:56:07.000+00:00",
+              "firstSeen" : "2000-01-23T04:56:07.000+00:00",
+              "email" : "email"
+            },
+            "phoneNumbers" : {
+              "formattedPhoneNumber" : "formattedPhoneNumber",
+              "country" : "country"
+            },
+            "age" : {
+              "birthdayIso" : "2000-01-23T04:56:07.000+00:00",
+              "birthdayTimestamp" : 5,
+              "birthdateCertainty" : true,
+              "human" : 1
+            }
+          },
+          "riskyTld" : true,
+          "valid" : true,
+          "smtpScore" : 0,
+          "common" : true,
+          "domainVelocity" : "high",
+          "requestId" : "requestId",
+          "dmarcRecord" : true,
+          "dnsValid" : true,
+          "fraudScore" : 56,
+          "timedOut" : true,
+          "firstSeen" : {
+            "iso" : "2000-01-23T04:56:07.000+00:00",
+            "human" : "human",
+            "timestamp" : 2
+          },
+          "overallScore" : 6,
+          "mxRecords" : [ "mxRecords", "mxRecords" ],
+          "suspect" : true,
+          "recentAbuse" : true,
+          "disposable" : true,
+          "generic" : true,
+          "domainTrust" : "trusted",
+          "honeypot" : true,
+          "aRecords" : [ "aRecords", "aRecords" ],
+          "firstName" : "firstName",
+          "spfRecord" : true,
+          "success" : true,
+          "userActivity" : "high",
+          "domainAge" : {
+            "iso" : "2000-01-23T04:56:07.000+00:00",
+            "human" : "human",
+            "timestamp" : 7
+          },
+          "suggestedDomain" : "suggestedDomain"
+        },
+        "properties" : {
+          "valid" : {
+            "description" : "Indicates if the email address is valid (true/false).",
+            "type" : "boolean"
+          },
+          "timedOut" : {
+            "description" : "True if the email server did not respond within the expected time.",
+            "type" : "boolean"
+          },
+          "disposable" : {
+            "description" : "True if the email is from a temporary/disposable email provider.",
+            "type" : "boolean"
+          },
+          "firstName" : {
+            "description" : "First name associated with the email address, if available.",
+            "type" : "string"
+          },
+          "deliverability" : {
+            "description" : "Likelihood that emails will be delivered to this address (e.g., high, medium, low).",
+            "enum" : [ "high", "medium", "low" ],
+            "type" : "string"
+          },
+          "smtpScore" : {
+            "description" : "Numeric score showing how well the email server responds to SMTP checks.",
+            "enum" : [ -1, 0, 1, 2, 3 ],
+            "type" : "integer"
+          },
+          "overallScore" : {
+            "description" : "General risk score for the email address, typically lower is better.",
+            "enum" : [ 0, 1, 2, 3, 4 ],
+            "type" : "integer"
+          },
+          "catchAll" : {
+            "description" : "True if the domain is a 'catch-all' and accepts all emails sent to it.",
+            "type" : "boolean"
+          },
+          "generic" : {
+            "description" : "True if the email is a generic address (e.g., info@, support@).",
+            "type" : "boolean"
+          },
+          "common" : {
+            "description" : "True if the email address is common or frequently used.",
+            "type" : "boolean"
+          },
+          "dnsValid" : {
+            "description" : "True if the domain has valid DNS records for email.",
+            "type" : "boolean"
+          },
+          "honeypot" : {
+            "description" : "True if the email is identified as a spam trap/honeypot.",
+            "type" : "boolean"
+          },
+          "frequentComplainer" : {
+            "description" : "True if this address is known to frequently mark emails as spam.",
+            "type" : "boolean"
+          },
+          "suspect" : {
+            "description" : "True if the email is suspected to be risky, fraudulent, or problematic.",
+            "type" : "boolean"
+          },
+          "recentAbuse" : {
+            "description" : "True if the email has recently been involved in abuse or spam activity.",
+            "type" : "boolean"
+          },
+          "identityData" : {
+            "$ref" : "#/components/schemas/EmailVerificationResponse_identityData"
+          },
+          "fraudScore" : {
+            "description" : "Numeric score (usually 0-100) representing the risk of fraud for this email.",
+            "maximum" : 100,
+            "minimum" : 0,
+            "type" : "integer"
+          },
+          "leaked" : {
+            "description" : "True if this email address has appeared in data leaks or breaches.",
+            "type" : "boolean"
+          },
+          "suggestedDomain" : {
+            "description" : "Alternative domain suggestion if the original domain might be a typo.",
+            "type" : "string"
+          },
+          "domainVelocity" : {
+            "description" : "Indicates how quickly the domain is being used/registered (e.g., high for many new accounts at once).",
+            "enum" : [ "high", "medium", "low", "none" ],
+            "type" : "string"
+          },
+          "domainTrust" : {
+            "description" : "Level of trust for the domain (e.g., trusted, untrusted).",
+            "enum" : [ "trusted", "positive", "neutral", "suspicious", "malicious", "notRated" ],
+            "type" : "string"
+          },
+          "userActivity" : {
+            "description" : "Level of past user activity associated with this email (high, medium, low).",
+            "enum" : [ "high", "medium", "low", "none" ],
+            "type" : "string"
+          },
+          "associatedNames" : {
+            "$ref" : "#/components/schemas/EmailVerificationResponse_associatedNames"
+          },
+          "associatedPhoneNumbers" : {
+            "$ref" : "#/components/schemas/EmailVerificationResponse_associatedPhoneNumbers"
+          },
+          "firstSeen" : {
+            "$ref" : "#/components/schemas/EmailVerificationResponse_firstSeen"
+          },
+          "domainAge" : {
+            "$ref" : "#/components/schemas/EmailVerificationResponse_domainAge"
+          },
+          "success" : {
+            "description" : "True if the API request was completed successfully.",
+            "type" : "boolean"
+          },
+          "spamTrapScore" : {
+            "description" : "Indicates spam trap risk (e.g., none, low, medium, high).",
+            "enum" : [ "high", "medium", "low", "none" ],
+            "type" : "string"
+          },
+          "riskyTld" : {
+            "description" : "True if the top-level domain (TLD) is considered risky (e.g., .xyz, .top).",
+            "type" : "boolean"
+          },
+          "spfRecord" : {
+            "description" : "True if the domain has a valid SPF (Sender Policy Framework) record.",
+            "type" : "boolean"
+          },
+          "dmarcRecord" : {
+            "description" : "True if the domain has a valid DMARC record.",
+            "type" : "boolean"
+          },
+          "sanitizedEmail" : {
+            "description" : "The standardized/cleaned version of the input email address.",
+            "type" : "string"
+          },
+          "mxRecords" : {
+            "description" : "List of mail exchange (MX) servers for the domain.",
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "requestId" : {
+            "description" : "Unique identifier for this API request, useful for troubleshooting.",
+            "type" : "string"
+          },
+          "aRecords" : {
+            "description" : "List of A (address) records for the domain, representing IP addresses.",
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "APIResponse" : {
+        "example" : {
+          "success" : true,
+          "message" : "message",
+          "errors" : [ "errors", "errors" ]
+        },
+        "properties" : {
+          "success" : {
+            "type" : "boolean"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "errors" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "EmailVerificationAPIResponse" : {
+        "example" : {
+          "result" : {
+            "deliverability" : "high",
+            "catchAll" : true,
+            "associatedNames" : {
+              "names" : [ "names", "names" ],
+              "status" : "status"
+            },
+            "frequentComplainer" : true,
+            "associatedPhoneNumbers" : {
+              "phoneNumbers" : [ "phoneNumbers", "phoneNumbers" ],
+              "status" : "status"
+            },
+            "leaked" : true,
+            "spamTrapScore" : "high",
+            "sanitizedEmail" : "sanitizedEmail",
+            "identityData" : {
+              "addresses" : {
+                "country" : "country",
+                "address" : "address",
+                "city" : "city",
+                "postalCode" : "postalCode",
+                "region" : "region"
+              },
+              "names" : {
+                "firstName" : "firstName",
+                "lastName" : "lastName",
+                "middleName" : "middleName"
+              },
+              "emailAddresses" : {
+                "lastSeen" : "2000-01-23T04:56:07.000+00:00",
+                "firstSeen" : "2000-01-23T04:56:07.000+00:00",
+                "email" : "email"
+              },
+              "phoneNumbers" : {
+                "formattedPhoneNumber" : "formattedPhoneNumber",
+                "country" : "country"
+              },
+              "age" : {
+                "birthdayIso" : "2000-01-23T04:56:07.000+00:00",
+                "birthdayTimestamp" : 5,
+                "birthdateCertainty" : true,
+                "human" : 1
+              }
+            },
+            "riskyTld" : true,
+            "valid" : true,
+            "smtpScore" : 0,
+            "common" : true,
+            "domainVelocity" : "high",
+            "requestId" : "requestId",
+            "dmarcRecord" : true,
+            "dnsValid" : true,
+            "fraudScore" : 56,
+            "timedOut" : true,
+            "firstSeen" : {
+              "iso" : "2000-01-23T04:56:07.000+00:00",
+              "human" : "human",
+              "timestamp" : 2
+            },
+            "overallScore" : 6,
+            "mxRecords" : [ "mxRecords", "mxRecords" ],
+            "suspect" : true,
+            "recentAbuse" : true,
+            "disposable" : true,
+            "generic" : true,
+            "domainTrust" : "trusted",
+            "honeypot" : true,
+            "aRecords" : [ "aRecords", "aRecords" ],
+            "firstName" : "firstName",
+            "spfRecord" : true,
+            "success" : true,
+            "userActivity" : "high",
+            "domainAge" : {
+              "iso" : "2000-01-23T04:56:07.000+00:00",
+              "human" : "human",
+              "timestamp" : 7
+            },
+            "suggestedDomain" : "suggestedDomain"
+          },
+          "apiResponse" : {
+            "success" : true,
+            "message" : "message",
+            "errors" : [ "errors", "errors" ]
+          }
+        },
+        "properties" : {
+          "result" : {
+            "$ref" : "#/components/schemas/EmailVerificationResponse"
+          },
+          "apiResponse" : {
+            "$ref" : "#/components/schemas/APIResponse"
+          }
+        },
+        "type" : "object"
+      },
+      "EmailVerificationResponse_identityData_names" : {
+        "description" : "An object containing names associated with the email address.",
+        "example" : {
+          "firstName" : "firstName",
+          "lastName" : "lastName",
+          "middleName" : "middleName"
+        },
+        "properties" : {
+          "firstName" : {
+            "description" : "Their first name.",
+            "type" : "string"
+          },
+          "lastName" : {
+            "description" : "Their last name.",
+            "type" : "string"
+          },
+          "middleName" : {
+            "description" : "Their middle name.",
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "EmailVerificationResponse_identityData_addresses" : {
+        "description" : "An object containing physical addresses associated with the email address.",
+        "example" : {
+          "country" : "country",
+          "address" : "address",
+          "city" : "city",
+          "postalCode" : "postalCode",
+          "region" : "region"
+        },
+        "properties" : {
+          "address" : {
+            "description" : "The street address.",
+            "type" : "string"
+          },
+          "city" : {
+            "description" : "The city.",
+            "type" : "string"
+          },
+          "region" : {
+            "description" : "The state or region.",
+            "type" : "string"
+          },
+          "postalCode" : {
+            "description" : "The postal code.",
+            "type" : "string"
+          },
+          "country" : {
+            "description" : "The country.",
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "EmailVerificationResponse_identityData_emailAddresses" : {
+        "description" : "An object containing other email addresses associated with the email address.",
+        "example" : {
+          "lastSeen" : "2000-01-23T04:56:07.000+00:00",
+          "firstSeen" : "2000-01-23T04:56:07.000+00:00",
+          "email" : "email"
+        },
+        "properties" : {
+          "email" : {
+            "description" : "The email address.",
+            "type" : "string"
+          },
+          "firstSeen" : {
+            "description" : "When the email address was first created.",
+            "format" : "date-time",
+            "type" : "string"
+          },
+          "lastSeen" : {
+            "description" : "When the email address was last used.",
+            "format" : "date-time",
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "EmailVerificationResponse_identityData_phoneNumbers" : {
+        "description" : "An object containing phone numbers associated with the email address.",
+        "example" : {
+          "formattedPhoneNumber" : "formattedPhoneNumber",
+          "country" : "country"
+        },
+        "properties" : {
+          "formattedPhoneNumber" : {
+            "description" : "The full phone number, including country code.",
+            "type" : "string"
+          },
+          "country" : {
+            "description" : "The country associated with the phone number.",
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "EmailVerificationResponse_identityData_age" : {
+        "description" : "An object containing ages of people associated with the email address.",
+        "example" : {
+          "birthdayIso" : "2000-01-23T04:56:07.000+00:00",
+          "birthdayTimestamp" : 5,
+          "birthdateCertainty" : true,
+          "human" : 1
+        },
+        "properties" : {
+          "human" : {
+            "description" : "How many years old the person is.",
+            "type" : "integer"
+          },
+          "birthdayIso" : {
+            "description" : "Their date of birth in ISO format.",
+            "format" : "date-time",
+            "type" : "string"
+          },
+          "birthdayTimestamp" : {
+            "description" : "Their birthday in timestamp format.",
+            "type" : "integer"
+          },
+          "birthdateCertainty" : {
+            "description" : "Whether we are certain the birthdate is correct.",
+            "type" : "boolean"
+          }
+        },
+        "type" : "object"
+      },
+      "EmailVerificationResponse_identityData" : {
+        "description" : "Identity and enrichment information associated with the email address.",
+        "example" : {
+          "addresses" : {
+            "country" : "country",
+            "address" : "address",
+            "city" : "city",
+            "postalCode" : "postalCode",
+            "region" : "region"
+          },
+          "names" : {
+            "firstName" : "firstName",
+            "lastName" : "lastName",
+            "middleName" : "middleName"
+          },
+          "emailAddresses" : {
+            "lastSeen" : "2000-01-23T04:56:07.000+00:00",
+            "firstSeen" : "2000-01-23T04:56:07.000+00:00",
+            "email" : "email"
+          },
+          "phoneNumbers" : {
+            "formattedPhoneNumber" : "formattedPhoneNumber",
+            "country" : "country"
+          },
+          "age" : {
+            "birthdayIso" : "2000-01-23T04:56:07.000+00:00",
+            "birthdayTimestamp" : 5,
+            "birthdateCertainty" : true,
+            "human" : 1
+          }
+        },
+        "properties" : {
+          "names" : {
+            "$ref" : "#/components/schemas/EmailVerificationResponse_identityData_names"
+          },
+          "addresses" : {
+            "$ref" : "#/components/schemas/EmailVerificationResponse_identityData_addresses"
+          },
+          "emailAddresses" : {
+            "$ref" : "#/components/schemas/EmailVerificationResponse_identityData_emailAddresses"
+          },
+          "phoneNumbers" : {
+            "$ref" : "#/components/schemas/EmailVerificationResponse_identityData_phoneNumbers"
+          },
+          "age" : {
+            "$ref" : "#/components/schemas/EmailVerificationResponse_identityData_age"
+          }
+        },
+        "type" : "object"
+      },
+      "EmailVerificationResponse_associatedNames" : {
+        "description" : "Names associated with the email address (may require higher subscription).",
+        "example" : {
+          "names" : [ "names", "names" ],
+          "status" : "status"
+        },
+        "properties" : {
+          "status" : {
+            "description" : "Status of data availability (e.g., \"Enterprise Plus or higher required.\").",
+            "type" : "string"
+          },
+          "names" : {
+            "description" : "List of associated names.",
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "EmailVerificationResponse_associatedPhoneNumbers" : {
+        "description" : "Phone numbers associated with the email address (may require higher subscription).",
+        "example" : {
+          "phoneNumbers" : [ "phoneNumbers", "phoneNumbers" ],
+          "status" : "status"
+        },
+        "properties" : {
+          "status" : {
+            "description" : "Status of data availability (e.g., \"Enterprise Plus or higher required.\").",
+            "type" : "string"
+          },
+          "phoneNumbers" : {
+            "description" : "List of associated phone numbers.",
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          }
+        },
+        "type" : "object"
+      },
+      "EmailVerificationResponse_firstSeen" : {
+        "description" : "When this email was first detected by the service.",
+        "example" : {
+          "iso" : "2000-01-23T04:56:07.000+00:00",
+          "human" : "human",
+          "timestamp" : 2
+        },
+        "properties" : {
+          "human" : {
+            "description" : "Human-readable representation of when first seen.",
+            "type" : "string"
+          },
+          "timestamp" : {
+            "description" : "Unix timestamp of when first seen.",
+            "type" : "integer"
+          },
+          "iso" : {
+            "description" : "ISO 8601 date/time of when first seen.",
+            "format" : "date-time",
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "EmailVerificationResponse_domainAge" : {
+        "description" : "Data on when the domain was first registered or seen.",
+        "example" : {
+          "iso" : "2000-01-23T04:56:07.000+00:00",
+          "human" : "human",
+          "timestamp" : 7
+        },
+        "properties" : {
+          "human" : {
+            "description" : "Human-readable representation of domain age.",
+            "type" : "string"
+          },
+          "timestamp" : {
+            "description" : "Unix timestamp of domain age.",
+            "type" : "integer"
+          },
+          "iso" : {
+            "description" : "ISO 8601 date/time of domain age.",
+            "format" : "date-time",
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      }
+    }
+  }
+}
