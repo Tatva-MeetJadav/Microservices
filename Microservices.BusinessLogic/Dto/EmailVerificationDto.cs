@@ -23,10 +23,10 @@ namespace Microservices.BusinessLogic.Dto
         public DeliverabilityEnum Deliverability { get; set; }
 
         [JsonProperty("smtp_score")]
-        public SmtpScoreEnum SmtpScore { get; set; }
+        public int SmtpScore { get; set; }
 
         [JsonProperty("overall_score")]
-        public OverallScoreEnum OverallScore { get; set; }
+        public int OverallScore { get; set; }
 
         [JsonProperty("catch_all")]
         public bool CatchAll { get; set; }
@@ -129,15 +129,14 @@ namespace Microservices.BusinessLogic.Dto
     public class TimeInfoDTO
     {
         [JsonProperty("human")]
-        public string Human { get; set; }
+        public string? Human { get; set; }
         [JsonProperty("timestamp")]
         public long Timestamp { get; set; }
         [JsonProperty("iso")]
         public string? Iso { get; set; }
     }
 
-    // Enum types matching the response model
-
+    // Enum types (unchanged)
     [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
     public enum DeliverabilityEnum
     {
@@ -147,36 +146,6 @@ namespace Microservices.BusinessLogic.Dto
         Medium = 2,
         [EnumMember(Value = "low")]
         Low = 3
-    }
-
-    [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-    public enum SmtpScoreEnum
-    {
-        [EnumMember(Value = "-1")]
-        _1 = -1,
-        [EnumMember(Value = "0")]
-        _0 = 0,
-        [EnumMember(Value = "1")]
-        _12 = 1,
-        [EnumMember(Value = "2")]
-        _2 = 2,
-        [EnumMember(Value = "3")]
-        _3 = 3
-    }
-
-    [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-    public enum OverallScoreEnum
-    {
-        [EnumMember(Value = "0")]
-        _0 = 0,
-        [EnumMember(Value = "1")]
-        _1 = 1,
-        [EnumMember(Value = "2")]
-        _2 = 2,
-        [EnumMember(Value = "3")]
-        _3 = 3,
-        [EnumMember(Value = "4")]
-        _4 = 4
     }
 
     [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
