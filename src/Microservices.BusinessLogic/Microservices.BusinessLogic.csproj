@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Microservices.DataAccess\Microservices.DataAccess.csproj" />
     <ProjectReference Include="..\Microservices.Models\Microservices.Models.csproj" />
   </ItemGroup>
 

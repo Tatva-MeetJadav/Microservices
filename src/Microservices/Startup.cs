@@ -27,9 +27,10 @@ using Microservices.BusinessLogic.APIClient.Implmentations;
 using Microservices.BusinessLogic.APIClient.Interfaces;
 using Microservices.BusinessLogic.Implmentations;
 using FluentValidation;
-using Microservices.Models;
 using FluentValidation.AspNetCore;
 using Microservices.Common.Validations;
+using Microservices.DataAccess.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Microservices
 {
@@ -103,12 +104,21 @@ namespace Microservices
                     // Use [ValidateModelState] on Actions to actually validate it in C# as well!
                     c.OperationFilter<GeneratePathParamsValidationFilter>();
                 });
-                services
-                    .AddSwaggerGenNewtonsoftSupport();
+                services.AddSwaggerGenNewtonsoftSupport();
 
+                //Adding DBContext
+                services.AddDbContext<MicroservicesDBContext>(options =>
+                    options.UseNpgsql(
+                        Configuration.GetConnectionString("DefaultConnection"),
+                        npgsqlOptions => npgsqlOptions.MigrationsAssembly("Microservices.Migrations")
+                    )
+                );
+
+
+                //Adding profiles of automapper
                 services.AddAutoMapper(typeof(EmailVerificationProfile).Assembly);
 
-                //Including services
+                //Injecting services
                 services.AddScoped<IEmailVerificationServices, EmailVerificationServices>();
                 services.AddScoped<IGenericAPIClientServices, GenericAPIClientService>();
 

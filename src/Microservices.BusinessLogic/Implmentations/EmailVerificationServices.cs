@@ -24,7 +24,7 @@ namespace Microservices.BusinessLogic.Implmentations
         public async Task<EmailVerificationAPIResponse> VerifyEmailAsync(EmailVerificationRequest request)
         {
             string data = request.Email;
-            if (request == null || string.IsNullOrWhiteSpace(request.Email))
+            if (request == null || string.IsNullOrWhiteSpace(data))
             {
                 throw new ArgumentException("Email is required.");
             }
