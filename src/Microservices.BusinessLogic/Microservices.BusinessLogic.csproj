@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Microservices.Models\Microservices.Models.csproj" />
+    <ProjectReference Include="..\Microservices.Models\Microservices.Models.csproj" />
   </ItemGroup>
 
 </Project>

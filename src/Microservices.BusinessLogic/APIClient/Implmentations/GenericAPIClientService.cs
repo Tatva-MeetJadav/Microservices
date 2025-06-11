@@ -13,7 +13,7 @@ namespace Microservices.BusinessLogic.APIClient.Implmentations
         }
         public async Task<T> GetAsync<T>(string data, string baseUrl, string apiKey)
         {
-            string url = string.Empty;
+            string url;
             if (baseUrl != null && apiKey != null)
             {
                 url = $"{baseUrl}/{apiKey}/{Uri.EscapeDataString(data)}";

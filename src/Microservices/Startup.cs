@@ -11,7 +11,6 @@
 using System;
 using System.IO;
 using System.Reflection;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -24,9 +23,9 @@ using Microservices.Filters;
 using Microservices.OpenApi;
 using Microservices.Formatters;
 using Microservices.BusinessLogic.Interfaces;
-using Microservices.BusinessLogic;
 using Microservices.BusinessLogic.APIClient.Implmentations;
 using Microservices.BusinessLogic.APIClient.Interfaces;
+using Microservices.BusinessLogic.Implmentations;
 
 namespace Microservices
 {

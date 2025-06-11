@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
-using Microservices.BusinessLogic.Dto;
+using Microservices.BusinessLogic.DTO;
 using Microservices.Models;
 
 public class EmailVerificationProfile : Profile
 {
     public EmailVerificationProfile()
     {
-        CreateMap<EmailVerificationDTO, EmailVerificationResponse>();
+        CreateMap<EmailVerificationResponseDTO, EmailVerificationResponse>();
         CreateMap<AssociatedNamesDTO, EmailVerificationResponseAssociatedNames>();
         CreateMap<AssociatedPhoneNumbersDTO, EmailVerificationResponseAssociatedPhoneNumbers>();
         CreateMap<TimeInfoDTO, EmailVerificationResponseFirstSeen>();

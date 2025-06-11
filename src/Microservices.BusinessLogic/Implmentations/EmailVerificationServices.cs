@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using Microservices.BusinessLogic.APIClient.Interfaces;
-using Microservices.BusinessLogic.Dto;
+using Microservices.BusinessLogic.DTO;
 using Microservices.BusinessLogic.Interfaces;
 using Microservices.Models;
 using Microsoft.Extensions.Configuration;
 
-namespace Microservices.BusinessLogic
+namespace Microservices.BusinessLogic.Implmentations
 {
     public class EmailVerificationServices : IEmailVerificationServices
     {
@@ -14,7 +14,7 @@ namespace Microservices.BusinessLogic
         private readonly IGenericAPIClientServices _apiClient;
         private readonly IMapper _mapper;
 
-        public EmailVerificationServices(IConfiguration configuration,IGenericAPIClientServices apiClient,IMapper mapper)
+        public EmailVerificationServices(IConfiguration configuration, IGenericAPIClientServices apiClient, IMapper mapper)
         {
             _apiKey = configuration["IPQS:ApiKey"] ?? string.Empty;
             _baseUrl = configuration["IPQS:BaseUrl"] ?? string.Empty;
@@ -29,7 +29,7 @@ namespace Microservices.BusinessLogic
                 throw new ArgumentException("Email is required.");
             }
 
-            EmailVerificationDTO resultDTO = await _apiClient.GetAsync<EmailVerificationDTO>(data, _baseUrl, _apiKey);
+            EmailVerificationResponseDTO resultDTO = await _apiClient.GetAsync<EmailVerificationResponseDTO>(data, _baseUrl, _apiKey);
             EmailVerificationResponse result = _mapper.Map<EmailVerificationResponse>(resultDTO);
             return new EmailVerificationAPIResponse
             {

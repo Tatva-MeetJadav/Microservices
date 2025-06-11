@@ -4,14 +4,21 @@ using Microsoft.AspNetCore.Mvc;
 using Microservices.BusinessLogic.Interfaces;
 using Microservices.Models;
 using System.Collections.Generic;
+using Microservices.Controllers;
 
-namespace Microservices.Controllers
+namespace Microservices.Implementations
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Route("[controller]")]
     public class EmailVerificationController : DefaultApiController
     {
         private readonly IEmailVerificationServices _emailVerificationService;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public EmailVerificationController(IEmailVerificationServices emailVerificationService)
         {
             _emailVerificationService = emailVerificationService;
@@ -24,7 +31,7 @@ namespace Microservices.Controllers
         /// <returns></returns>
         public override async Task<IActionResult> EmailVerifyPost([FromBody] EmailVerificationRequest request)
         {
-            if (request == null || string.IsNullOrWhiteSpace(request.Email))
+            if (request == null || string.IsNullOrEmpty(request.Email))
             {
                 return BadRequest(new APIResponse
                 {
@@ -35,8 +42,8 @@ namespace Microservices.Controllers
             }
             try
             {
-                var result = await _emailVerificationService.VerifyEmailAsync(request);
-                return Ok(result); // 200 with EmailVerificationAPIResponse
+                EmailVerificationAPIResponse result = await _emailVerificationService.VerifyEmailAsync(request);
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -44,7 +51,7 @@ namespace Microservices.Controllers
                 {
                     Success = false,
                     Message = "An unexpected error occurred.",
-                    Errors = new List<string>{ ex.Message },
+                    Errors = new List<string> { ex.Message },
                 });
             }
         }

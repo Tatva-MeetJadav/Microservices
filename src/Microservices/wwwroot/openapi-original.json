@@ -143,7 +143,7 @@
             "human" : "human",
             "timestamp" : 2
           },
-          "overallScore" : 6,
+          "overallScore" : 2,
           "mxRecords" : [ "mxRecords", "mxRecords" ],
           "suspect" : true,
           "recentAbuse" : true,
@@ -187,12 +187,14 @@
           },
           "smtpScore" : {
             "description" : "Numeric score showing how well the email server responds to SMTP checks.",
-            "enum" : [ -1, 0, 1, 2, 3 ],
+            "maximum" : 3,
+            "minimum" : -1,
             "type" : "integer"
           },
           "overallScore" : {
             "description" : "General risk score for the email address, typically lower is better.",
-            "enum" : [ 0, 1, 2, 3, 4 ],
+            "maximum" : 4,
+            "minimum" : 0,
             "type" : "integer"
           },
           "catchAll" : {
@@ -400,7 +402,7 @@
               "human" : "human",
               "timestamp" : 2
             },
-            "overallScore" : 6,
+            "overallScore" : 2,
             "mxRecords" : [ "mxRecords", "mxRecords" ],
             "suspect" : true,
             "recentAbuse" : true,

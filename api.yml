@@ -1,9 +1,9 @@
 openapi: 3.0.3
 info:
-  title: Email Verification API (IPQS)
+  title: Email Verification API
   version: 1.0.0
   description: |
-    This API verifies the validity, risk, and deliverability of an email address using IPQS.
+    This API verifies the validity, risk, and deliverability of an email address.
 servers:
   - url: https://microservices.com
 paths:
@@ -76,11 +76,13 @@ components:
           description: Likelihood that emails will be delivered to this address (e.g., high, medium, low).
         smtpScore:
           type: integer
-          enum: [-1, 0, 1, 2, 3]
+          minimum: -1
+          maximum: 3
           description: Numeric score showing how well the email server responds to SMTP checks.
         overallScore:
           type: integer
-          enum: [0, 1, 2, 3, 4]
+          minimum: 0
+          maximum: 4
           description: General risk score for the email address, typically lower is better.
         catchAll:
           type: boolean

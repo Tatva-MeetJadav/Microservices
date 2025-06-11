@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
-namespace Microservices.BusinessLogic.Dto
+namespace Microservices.BusinessLogic.DTO
 {
-    public class EmailVerificationDTO
+    public class EmailVerificationResponseDTO
     {
         [JsonProperty("valid")]
         public bool Valid { get; set; }
