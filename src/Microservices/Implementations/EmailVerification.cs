@@ -12,6 +12,7 @@ namespace Microservices.Implementations
     /// 
     /// </summary>
     [Route("[controller]")]
+    [ApiController]
     public class EmailVerificationController : DefaultApiController
     {
         private readonly IEmailVerificationServices _emailVerificationService;

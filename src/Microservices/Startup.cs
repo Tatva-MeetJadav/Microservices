@@ -26,6 +26,10 @@ using Microservices.BusinessLogic.Interfaces;
 using Microservices.BusinessLogic.APIClient.Implmentations;
 using Microservices.BusinessLogic.APIClient.Interfaces;
 using Microservices.BusinessLogic.Implmentations;
+using FluentValidation;
+using Microservices.Models;
+using FluentValidation.AspNetCore;
+using Microservices.Common.Validations;
 
 namespace Microservices
 {
@@ -76,8 +80,8 @@ namespace Microservices
                     
                     c.SwaggerDoc("1.0.0", new OpenApiInfo
                     {
-                        Title = "Email Verification API (IPQS)",
-                        Description = "Email Verification API (IPQS) (ASP.NET Core 7.0)",
+                        Title = "Email Verification API",
+                        Description = "Email Verification API (ASP.NET Core 7.0)",
                         TermsOfService = new Uri("https://github.com/openapitools/openapi-generator"),
                         Contact = new OpenApiContact
                         {
@@ -107,6 +111,15 @@ namespace Microservices
                 //Including services
                 services.AddScoped<IEmailVerificationServices, EmailVerificationServices>();
                 services.AddScoped<IGenericAPIClientServices, GenericAPIClientService>();
+
+                //Injecting validation
+                services.AddValidatorsFromAssemblyContaining<EmailVerificationRequestValidator>();
+                services.AddFluentValidationAutoValidation();
+                services.AddFluentValidationClientsideAdapters();
+
+
+                
+                //Injecting HttpClientService
                 services.AddHttpClient<GenericAPIClientService>();
         }
 

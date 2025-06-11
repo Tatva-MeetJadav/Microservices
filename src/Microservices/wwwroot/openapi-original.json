@@ -1,8 +1,8 @@
 {
   "openapi" : "3.0.3",
   "info" : {
-    "description" : "This API verifies the validity, risk, and deliverability of an email address using IPQS.\n",
-    "title" : "Email Verification API (IPQS)",
+    "description" : "This API verifies the validity, risk, and deliverability of an email address.\n",
+    "title" : "Email Verification API",
     "version" : "1.0.0"
   },
   "servers" : [ {

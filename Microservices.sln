@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservices.DataAccess", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservices.Migrations", "src\Microservices.Migrations\Microservices.Migrations.csproj", "{AC386540-921A-4135-B23A-31524C45D459}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservices.Common", "src\Microservices.Common\Microservices.Common.csproj", "{B8026D54-90DF-488C-86C1-91AA08535FD6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{AC386540-921A-4135-B23A-31524C45D459}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC386540-921A-4135-B23A-31524C45D459}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC386540-921A-4135-B23A-31524C45D459}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8026D54-90DF-488C-86C1-91AA08535FD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8026D54-90DF-488C-86C1-91AA08535FD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8026D54-90DF-488C-86C1-91AA08535FD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8026D54-90DF-488C-86C1-91AA08535FD6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

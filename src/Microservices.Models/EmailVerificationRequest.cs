@@ -1,7 +1,7 @@
 /*
- * Email Verification API (IPQS)
+ * Email Verification API
  *
- * This API verifies the validity, risk, and deliverability of an email address using IPQS. 
+ * This API verifies the validity, risk, and deliverability of an email address. 
  *
  * The version of the OpenAPI document: 1.0.0
  * 
