@@ -12,6 +12,7 @@ namespace Microservices.DataAccess.Models
         [MaxLength(2048)]
         public string? MessageTemplate { get; set; }
 
+        [MaxLength(20)]
         public string? Level { get; set; }
 
         public DateTime RaiseDate { get; set; }
