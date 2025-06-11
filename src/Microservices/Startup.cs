@@ -20,12 +20,13 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
-using Microservices.Authentication;
 using Microservices.Filters;
 using Microservices.OpenApi;
 using Microservices.Formatters;
 using Microservices.BusinessLogic.Interfaces;
 using Microservices.BusinessLogic;
+using Microservices.BusinessLogic.APIClient.Implmentations;
+using Microservices.BusinessLogic.APIClient.Interfaces;
 
 namespace Microservices
 {
@@ -101,11 +102,13 @@ namespace Microservices
                 });
                 services
                     .AddSwaggerGenNewtonsoftSupport();
+
                 services.AddAutoMapper(typeof(EmailVerificationProfile).Assembly);
 
                 //Including services
                 services.AddScoped<IEmailVerificationServices, EmailVerificationServices>();
-                services.AddHttpClient<EmailVerificationServices>();
+                services.AddScoped<IGenericAPIClientServices, GenericAPIClientService>();
+                services.AddHttpClient<GenericAPIClientService>();
         }
 
         /// <summary>

@@ -6,7 +6,12 @@ public class EmailVerificationProfile : Profile
 {
     public EmailVerificationProfile()
     {
-        CreateMap<EmailVerificationDto, EmailVerificationAPIResponse>();
-        // Add additional mappings as needed
+        CreateMap<EmailVerificationDTO, EmailVerificationResponse>();
+
+        CreateMap<AssociatedNamesDTO, EmailVerificationResponseAssociatedNames>();
+
+        CreateMap<AssociatedPhoneNumbersDTO, EmailVerificationResponseAssociatedPhoneNumbers>();
+        CreateMap<TimeInfoDTO, EmailVerificationResponseFirstSeen>();
+        CreateMap<TimeInfoDTO, EmailVerificationResponseDomainAge>(); ;
     }
 }
