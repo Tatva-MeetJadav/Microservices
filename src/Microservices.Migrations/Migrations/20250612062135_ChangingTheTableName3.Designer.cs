@@ -3,6 +3,7 @@ using System;
 using Microservices.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Microservices.Migrations.Migrations
 {
     [DbContext(typeof(MicroservicesDBContext))]
-    partial class MicroservicesDBContextModelSnapshot : ModelSnapshot
+    [Migration("20250612062135_ChangingTheTableName3")]
+    partial class ChangingTheTableName3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,12 +38,14 @@ namespace Microservices.Migrations.Migrations
                         .HasColumnType("text")
                         .HasColumnName("exception");
 
-                    b.Property<int>("Level")
-                        .HasColumnType("integer")
+                    b.Property<string>("Level")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
                         .HasColumnName("level");
 
                     b.Property<string>("MachineName")
-                        .HasColumnType("text")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
                         .HasColumnName("machinename");
 
                     b.Property<string>("Message")

@@ -1,26 +1,30 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Microservices.DataAccess.Models
 {
+    [Table("Logs")]
     public class Log
     {
-        public long Id { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
 
-        [MaxLength(1024)]
         public string? Message { get; set; }
 
-        [MaxLength(2048)]
         public string? MessageTemplate { get; set; }
 
-        [MaxLength(20)]
-        public string? Level { get; set; }
+        public int Level { get; set; }
 
-        public DateTime RaiseDate { get; set; }
+        public DateTime RaiseDate { get; set; } 
 
         public string? Exception { get; set; }
 
         public string? Properties { get; set; }
 
-        public string? LogEvent { get; set; }
+        public string? PropsTest { get; set; } 
+
+        public string? MachineName { get; set; }
     }
 }

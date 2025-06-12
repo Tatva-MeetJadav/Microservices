@@ -31,6 +31,8 @@ using FluentValidation.AspNetCore;
 using Microservices.Common.Validations;
 using Microservices.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
+using Microservices.Common.Mappings;
+using Microservices.Common.ErrorHandlers;
 
 namespace Microservices
 {
@@ -106,6 +108,9 @@ namespace Microservices
                 });
                 services.AddSwaggerGenNewtonsoftSupport();
 
+                //Adding ModelValidationLogging
+                services.AddModelValidationLogging();
+
                 //Adding DBContext
                 services.AddDbContext<MicroservicesDBContext>(options =>
                     options.UseNpgsql(
@@ -139,7 +144,7 @@ namespace Microservices
         /// <param name="app"></param>
         /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
+        { 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -148,7 +153,7 @@ namespace Microservices
             {
                 app.UseHsts();
             }
-
+            app.UseMiddleware<GlobalExceptionMiddleware>();
             app.UseHttpsRedirection();
             app.UseDefaultFiles();
             app.UseStaticFiles();

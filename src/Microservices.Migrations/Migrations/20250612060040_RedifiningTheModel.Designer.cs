@@ -3,6 +3,7 @@ using System;
 using Microservices.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Microservices.Migrations.Migrations
 {
     [DbContext(typeof(MicroservicesDBContext))]
-    partial class MicroservicesDBContextModelSnapshot : ModelSnapshot
+    [Migration("20250612060040_RedifiningTheModel")]
+    partial class RedifiningTheModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,46 +29,39 @@ namespace Microservices.Migrations.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
+                        .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Exception")
-                        .HasColumnType("text")
-                        .HasColumnName("exception");
+                        .HasColumnType("text");
 
-                    b.Property<int>("Level")
-                        .HasColumnType("integer")
-                        .HasColumnName("level");
+                    b.Property<string>("Level")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
 
                     b.Property<string>("MachineName")
-                        .HasColumnType("text")
-                        .HasColumnName("machinename");
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<string>("Message")
-                        .HasColumnType("text")
-                        .HasColumnName("message");
+                        .HasColumnType("text");
 
                     b.Property<string>("MessageTemplate")
-                        .HasColumnType("text")
-                        .HasColumnName("messagetemplate");
+                        .HasColumnType("text");
 
                     b.Property<string>("Properties")
-                        .HasColumnType("text")
-                        .HasColumnName("properties");
+                        .HasColumnType("text");
 
                     b.Property<string>("PropsTest")
-                        .HasColumnType("text")
-                        .HasColumnName("propstest");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("RaiseDate")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("raisedate");
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
-                    b.ToTable("logs");
+                    b.ToTable("Logs");
                 });
 #pragma warning restore 612, 618
         }
