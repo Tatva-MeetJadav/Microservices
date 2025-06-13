@@ -1,4 +1,3 @@
-Microservices.sln
 README.md
 build.bat
 build.sh
@@ -27,13 +26,8 @@ src/Microservices/Dockerfile
 src/Microservices/Filters/BasePathFilter.cs
 src/Microservices/Filters/GeneratePathParamsValidationFilter.cs
 src/Microservices/Formatters/InputFormatterStream.cs
-src/Microservices/Microservices.csproj
 src/Microservices/OpenApi/TypeExtensions.cs
-src/Microservices/Program.cs
-src/Microservices/Properties/launchSettings.json
-src/Microservices/Startup.cs
 src/Microservices/appsettings.Development.json
-src/Microservices/appsettings.json
 src/Microservices/wwwroot/README.md
 src/Microservices/wwwroot/index.html
 src/Microservices/wwwroot/openapi-original.json

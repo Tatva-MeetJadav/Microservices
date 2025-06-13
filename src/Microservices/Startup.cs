@@ -11,7 +11,6 @@
 using System;
 using System.IO;
 using System.Reflection;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -20,10 +19,20 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
-using Microservices.Authentication;
 using Microservices.Filters;
 using Microservices.OpenApi;
 using Microservices.Formatters;
+using Microservices.BusinessLogic.Interfaces;
+using Microservices.BusinessLogic.APIClient.Implmentations;
+using Microservices.BusinessLogic.APIClient.Interfaces;
+using Microservices.BusinessLogic.Implmentations;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using Microservices.Common.Validations;
+using Microservices.DataAccess.Data;
+using Microsoft.EntityFrameworkCore;
+using Microservices.Common.ErrorHandlers;
+using Microservices.Common.AutoMapperProfiles;
 
 namespace Microservices
 {
@@ -74,8 +83,8 @@ namespace Microservices
                     
                     c.SwaggerDoc("1.0.0", new OpenApiInfo
                     {
-                        Title = "Email Verification API (IPQS)",
-                        Description = "Email Verification API (IPQS) (ASP.NET Core 7.0)",
+                        Title = "Email Verification API",
+                        Description = "Email Verification API (ASP.NET Core 7.0)",
                         TermsOfService = new Uri("https://github.com/openapitools/openapi-generator"),
                         Contact = new OpenApiContact
                         {
@@ -97,8 +106,36 @@ namespace Microservices
                     // Use [ValidateModelState] on Actions to actually validate it in C# as well!
                     c.OperationFilter<GeneratePathParamsValidationFilter>();
                 });
-                services
-                    .AddSwaggerGenNewtonsoftSupport();
+                services.AddSwaggerGenNewtonsoftSupport();
+
+                //Adding ModelValidationLogging
+                services.AddModelValidationLogging();
+
+                //Adding DBContext
+                services.AddDbContext<MicroservicesDBContext>(options =>
+                    options.UseNpgsql(
+                        Configuration.GetConnectionString("DefaultConnection"),
+                        npgsqlOptions => npgsqlOptions.MigrationsAssembly("Microservices.Migrations")
+                    )
+                );
+
+
+                //Adding profiles of automapper
+                services.AddAutoMapper(typeof(EmailVerificationProfile).Assembly);
+
+                //Injecting services
+                services.AddScoped<IEmailVerificationServices, EmailVerificationServices>();
+                services.AddScoped<IGenericAPIClientServices, GenericAPIClientServices>();
+
+                //Injecting validation
+                services.AddValidatorsFromAssemblyContaining<EmailVerificationRequestValidator>();
+                services.AddFluentValidationAutoValidation();
+                services.AddFluentValidationClientsideAdapters();
+
+
+                
+                //Injecting HttpClientService
+                services.AddHttpClient<GenericAPIClientServices>();
         }
 
         /// <summary>
@@ -107,7 +144,7 @@ namespace Microservices
         /// <param name="app"></param>
         /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
+        { 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -116,7 +153,7 @@ namespace Microservices
             {
                 app.UseHsts();
             }
-
+            app.UseMiddleware<GlobalExceptionMiddleware>();
             app.UseHttpsRedirection();
             app.UseDefaultFiles();
             app.UseStaticFiles();

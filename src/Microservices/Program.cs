@@ -1,5 +1,8 @@
+using Microservices.Common.Utilities;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 
 namespace Microservices
 {
@@ -14,6 +17,11 @@ namespace Microservices
         /// <param name="args"></param>
         public static void Main(string[] args)
         {
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            SerilogConfiguration.ConfigureSerilog(configuration);
             CreateHostBuilder(args).Build().Run();
         }
 
@@ -24,10 +32,11 @@ namespace Microservices
         /// <returns>IHostBuilder</returns>
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .UseSerilog()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                   webBuilder.UseStartup<Startup>()
-                             .UseUrls("http://0.0.0.0:8080/");
+                    webBuilder.UseStartup<Startup>()
+                              .UseUrls("https://localhost:7001/");
                 });
     }
 }

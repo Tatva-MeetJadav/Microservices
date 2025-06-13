@@ -1,6 +1,6 @@
 # Microservices - ASP.NET Core 7.0 Server
 
-This API verifies the validity, risk, and deliverability of an email address using IPQS.
+This API verifies the validity, risk, and deliverability of an email address.
 
 
 ## Upgrade NuGet Packages

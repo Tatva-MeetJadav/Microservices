@@ -1,9 +1,9 @@
 openapi: 3.0.3
 info:
-  title: Email Verification API (IPQS)
+  title: Email Verification API
   version: 1.0.0
   description: |
-    This API verifies the validity, risk, and deliverability of an email address using IPQS.
+    This API verifies the validity, risk, and deliverability of an email address.
 servers:
   - url: https://microservices.com
 paths:
@@ -45,25 +45,15 @@ paths:
                 message: "A server error occurred. Please try again later."
                 errors: ["Internal server error."]
         "503":
-          description: Service Unavailable. The service is temporarily unavailable.
+          description: Network error.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/APIResponse"
               example:
                 success: false
-                message: "The service is temporarily unavailable. Please try again later."
-                errors: ["Service unavailable."]
-        "404":
-          description: Not Found. The requested resource or endpoint does not exist.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/APIResponse"
-              example:
-                success: false
-                message: "Endpoint not found."
-                errors: ["The requested endpoint does not exist."]
+                message: "A connection error occurred, Please check your connection again."
+                errors: ["Netowork connection error."]
 
 components:
   schemas:
@@ -71,15 +61,10 @@ components:
       type: object
       required:
         - email
-        - apiKey
       properties:
         email:
           type: string
           description: Email address to be verified.
-        apiKey:
-          type: string
-          description: IPQS API key.
-
     EmailVerificationResponse:
       type: object
       properties:
@@ -101,11 +86,13 @@ components:
           description: Likelihood that emails will be delivered to this address (e.g., high, medium, low).
         smtpScore:
           type: integer
-          enum: [-1, 0, 1, 2, 3]
+          minimum: -1
+          maximum: 3
           description: Numeric score showing how well the email server responds to SMTP checks.
         overallScore:
           type: integer
-          enum: [0, 1, 2, 3, 4]
+          minimum: 0
+          maximum: 4
           description: General risk score for the email address, typically lower is better.
         catchAll:
           type: boolean
@@ -330,7 +317,7 @@ components:
     EmailVerificationAPIResponse:
       type: object
       properties:
-        result:
-          $ref: "#/components/schemas/EmailVerificationResponse"
         apiResponse:
           $ref: "#/components/schemas/APIResponse"
+        result:
+          $ref: "#/components/schemas/EmailVerificationResponse"

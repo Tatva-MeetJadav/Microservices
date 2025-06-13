@@ -1,7 +1,7 @@
 /*
- * Email Verification API (IPQS)
+ * Email Verification API
  *
- * This API verifies the validity, risk, and deliverability of an email address using IPQS. 
+ * This API verifies the validity, risk, and deliverability of an email address. 
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -90,99 +90,21 @@ namespace Microservices.Models
         [DataMember(Name="deliverability", EmitDefaultValue=true)]
         public DeliverabilityEnum Deliverability { get; set; }
 
-
         /// <summary>
         /// Numeric score showing how well the email server responds to SMTP checks.
         /// </summary>
         /// <value>Numeric score showing how well the email server responds to SMTP checks.</value>
-        
-        public enum SmtpScoreEnum
-        {
-            
-            /// <summary>
-            /// Enum _1 for -1
-            /// </summary>
-            
-            _1 = -1,
-            
-            /// <summary>
-            /// Enum _0 for 0
-            /// </summary>
-            
-            _0 = 0,
-            
-            /// <summary>
-            /// Enum _12 for 1
-            /// </summary>
-            
-            _12 = 1,
-            
-            /// <summary>
-            /// Enum _2 for 2
-            /// </summary>
-            
-            _2 = 2,
-            
-            /// <summary>
-            /// Enum _3 for 3
-            /// </summary>
-            
-            _3 = 3
-        }
-
-        /// <summary>
-        /// Numeric score showing how well the email server responds to SMTP checks.
-        /// </summary>
-        /// <value>Numeric score showing how well the email server responds to SMTP checks.</value>
+        [Range(-1, 3)]
         [DataMember(Name="smtpScore", EmitDefaultValue=true)]
-        public SmtpScoreEnum SmtpScore { get; set; }
-
-
-        /// <summary>
-        /// General risk score for the email address, typically lower is better.
-        /// </summary>
-        /// <value>General risk score for the email address, typically lower is better.</value>
-        
-        public enum OverallScoreEnum
-        {
-            
-            /// <summary>
-            /// Enum _0 for 0
-            /// </summary>
-            
-            _0 = 0,
-            
-            /// <summary>
-            /// Enum _1 for 1
-            /// </summary>
-            
-            _1 = 1,
-            
-            /// <summary>
-            /// Enum _2 for 2
-            /// </summary>
-            
-            _2 = 2,
-            
-            /// <summary>
-            /// Enum _3 for 3
-            /// </summary>
-            
-            _3 = 3,
-            
-            /// <summary>
-            /// Enum _4 for 4
-            /// </summary>
-            
-            _4 = 4
-        }
+        public int SmtpScore { get; set; }
 
         /// <summary>
         /// General risk score for the email address, typically lower is better.
         /// </summary>
         /// <value>General risk score for the email address, typically lower is better.</value>
+        [Range(0, 4)]
         [DataMember(Name="overallScore", EmitDefaultValue=true)]
-        public OverallScoreEnum OverallScore { get; set; }
+        public int OverallScore { get; set; }
 
         /// <summary>
         /// True if the domain is a &#39;catch-all&#39; and accepts all emails sent to it.

@@ -1,7 +1,7 @@
 /*
- * Email Verification API (IPQS)
+ * Email Verification API
  *
- * This API verifies the validity, risk, and deliverability of an email address using IPQS. 
+ * This API verifies the validity, risk, and deliverability of an email address. 
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -38,8 +38,7 @@ namespace Microservices.Controllers
         /// <response code="200">Email verification result</response>
         /// <response code="400">Bad Request. The request was invalid or missing required parameters.</response>
         /// <response code="500">Internal Server Error. An unexpected error occurred on the server.</response>
-        /// <response code="503">Service Unavailable. The service is temporarily unavailable.</response>
-        /// <response code="404">Not Found. The requested resource or endpoint does not exist.</response>
+        /// <response code="503">Network error.</response>
         [HttpPost]
         [Route("/emailVerify")]
         [Consumes("application/json")]
@@ -48,8 +47,7 @@ namespace Microservices.Controllers
         [SwaggerResponse(statusCode: 200, type: typeof(EmailVerificationAPIResponse), description: "Email verification result")]
         [SwaggerResponse(statusCode: 400, type: typeof(APIResponse), description: "Bad Request. The request was invalid or missing required parameters.")]
         [SwaggerResponse(statusCode: 500, type: typeof(APIResponse), description: "Internal Server Error. An unexpected error occurred on the server.")]
-        [SwaggerResponse(statusCode: 503, type: typeof(APIResponse), description: "Service Unavailable. The service is temporarily unavailable.")]
-        [SwaggerResponse(statusCode: 404, type: typeof(APIResponse), description: "Not Found. The requested resource or endpoint does not exist.")]
+        [SwaggerResponse(statusCode: 503, type: typeof(APIResponse), description: "Network error.")]
         public abstract Task<IActionResult> EmailVerifyPost([FromBody]EmailVerificationRequest emailVerificationRequest);
     }
 }

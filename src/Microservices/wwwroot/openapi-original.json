@@ -1,8 +1,8 @@
 {
   "openapi" : "3.0.3",
   "info" : {
-    "description" : "This API verifies the validity, risk, and deliverability of an email address using IPQS.\n",
-    "title" : "Email Verification API (IPQS)",
+    "description" : "This API verifies the validity, risk, and deliverability of an email address.\n",
+    "title" : "Email Verification API",
     "version" : "1.0.0"
   },
   "servers" : [ {
@@ -68,30 +68,15 @@
               "application/json" : {
                 "example" : {
                   "success" : false,
-                  "message" : "The service is temporarily unavailable. Please try again later.",
-                  "errors" : [ "Service unavailable." ]
+                  "message" : "A connection error occurred, Please check your connection again.",
+                  "errors" : [ "Netowork connection error." ]
                 },
                 "schema" : {
                   "$ref" : "#/components/schemas/APIResponse"
                 }
               }
             },
-            "description" : "Service Unavailable. The service is temporarily unavailable."
-          },
-          "404" : {
-            "content" : {
-              "application/json" : {
-                "example" : {
-                  "success" : false,
-                  "message" : "Endpoint not found.",
-                  "errors" : [ "The requested endpoint does not exist." ]
-                },
-                "schema" : {
-                  "$ref" : "#/components/schemas/APIResponse"
-                }
-              }
-            },
-            "description" : "Not Found. The requested resource or endpoint does not exist."
+            "description" : "Network error."
           }
         },
         "summary" : "Verify and score an email address"
@@ -102,20 +87,15 @@
     "schemas" : {
       "EmailVerificationRequest" : {
         "example" : {
-          "apiKey" : "apiKey",
           "email" : "email"
         },
         "properties" : {
           "email" : {
             "description" : "Email address to be verified.",
             "type" : "string"
-          },
-          "apiKey" : {
-            "description" : "IPQS API key.",
-            "type" : "string"
           }
         },
-        "required" : [ "apiKey", "email" ],
+        "required" : [ "email" ],
         "type" : "object"
       },
       "EmailVerificationResponse" : {
@@ -178,7 +158,7 @@
             "human" : "human",
             "timestamp" : 2
           },
-          "overallScore" : 6,
+          "overallScore" : 2,
           "mxRecords" : [ "mxRecords", "mxRecords" ],
           "suspect" : true,
           "recentAbuse" : true,
@@ -222,12 +202,14 @@
           },
           "smtpScore" : {
             "description" : "Numeric score showing how well the email server responds to SMTP checks.",
-            "enum" : [ -1, 0, 1, 2, 3 ],
+            "maximum" : 3,
+            "minimum" : -1,
             "type" : "integer"
           },
           "overallScore" : {
             "description" : "General risk score for the email address, typically lower is better.",
-            "enum" : [ 0, 1, 2, 3, 4 ],
+            "maximum" : 4,
+            "minimum" : 0,
             "type" : "integer"
           },
           "catchAll" : {
@@ -435,7 +417,7 @@
               "human" : "human",
               "timestamp" : 2
             },
-            "overallScore" : 6,
+            "overallScore" : 2,
             "mxRecords" : [ "mxRecords", "mxRecords" ],
             "suspect" : true,
             "recentAbuse" : true,
@@ -462,11 +444,11 @@
           }
         },
         "properties" : {
-          "result" : {
-            "$ref" : "#/components/schemas/EmailVerificationResponse"
-          },
           "apiResponse" : {
             "$ref" : "#/components/schemas/APIResponse"
+          },
+          "result" : {
+            "$ref" : "#/components/schemas/EmailVerificationResponse"
           }
         },
         "type" : "object"

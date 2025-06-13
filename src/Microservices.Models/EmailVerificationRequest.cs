@@ -1,7 +1,7 @@
 /*
- * Email Verification API (IPQS)
+ * Email Verification API
  *
- * This API verifies the validity, risk, and deliverability of an email address using IPQS. 
+ * This API verifies the validity, risk, and deliverability of an email address. 
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -35,14 +35,6 @@ namespace Microservices.Models
         public string Email { get; set; }
 
         /// <summary>
-        /// IPQS API key.
-        /// </summary>
-        /// <value>IPQS API key.</value>
-        [Required]
-        [DataMember(Name="apiKey", EmitDefaultValue=false)]
-        public string ApiKey { get; set; }
-
-        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -51,7 +43,6 @@ namespace Microservices.Models
             var sb = new StringBuilder();
             sb.Append("class EmailVerificationRequest {\n");
             sb.Append("  Email: ").Append(Email).Append("\n");
-            sb.Append("  ApiKey: ").Append(ApiKey).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -92,11 +83,6 @@ namespace Microservices.Models
                     Email == other.Email ||
                     Email != null &&
                     Email.Equals(other.Email)
-                ) && 
-                (
-                    ApiKey == other.ApiKey ||
-                    ApiKey != null &&
-                    ApiKey.Equals(other.ApiKey)
                 );
         }
 
@@ -112,8 +98,6 @@ namespace Microservices.Models
                 // Suitable nullity checks etc, of course :)
                     if (Email != null)
                     hashCode = hashCode * 59 + Email.GetHashCode();
-                    if (ApiKey != null)
-                    hashCode = hashCode * 59 + ApiKey.GetHashCode();
                 return hashCode;
             }
         }

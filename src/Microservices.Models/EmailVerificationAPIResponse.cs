@@ -1,7 +1,7 @@
 /*
- * Email Verification API (IPQS)
+ * Email Verification API
  *
- * This API verifies the validity, risk, and deliverability of an email address using IPQS. 
+ * This API verifies the validity, risk, and deliverability of an email address. 
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -27,16 +27,16 @@ namespace Microservices.Models
     public partial class EmailVerificationAPIResponse : IEquatable<EmailVerificationAPIResponse>
     {
         /// <summary>
-        /// Gets or Sets Result
-        /// </summary>
-        [DataMember(Name="result", EmitDefaultValue=false)]
-        public EmailVerificationResponse Result { get; set; }
-
-        /// <summary>
         /// Gets or Sets ApiResponse
         /// </summary>
         [DataMember(Name="apiResponse", EmitDefaultValue=false)]
         public APIResponse ApiResponse { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Result
+        /// </summary>
+        [DataMember(Name="result", EmitDefaultValue=false)]
+        public EmailVerificationResponse Result { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -46,8 +46,8 @@ namespace Microservices.Models
         {
             var sb = new StringBuilder();
             sb.Append("class EmailVerificationAPIResponse {\n");
-            sb.Append("  Result: ").Append(Result).Append("\n");
             sb.Append("  ApiResponse: ").Append(ApiResponse).Append("\n");
+            sb.Append("  Result: ").Append(Result).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -85,14 +85,14 @@ namespace Microservices.Models
 
             return 
                 (
-                    Result == other.Result ||
-                    Result != null &&
-                    Result.Equals(other.Result)
-                ) && 
-                (
                     ApiResponse == other.ApiResponse ||
                     ApiResponse != null &&
                     ApiResponse.Equals(other.ApiResponse)
+                ) && 
+                (
+                    Result == other.Result ||
+                    Result != null &&
+                    Result.Equals(other.Result)
                 );
         }
 
@@ -106,10 +106,10 @@ namespace Microservices.Models
             {
                 var hashCode = 41;
                 // Suitable nullity checks etc, of course :)
-                    if (Result != null)
-                    hashCode = hashCode * 59 + Result.GetHashCode();
                     if (ApiResponse != null)
                     hashCode = hashCode * 59 + ApiResponse.GetHashCode();
+                    if (Result != null)
+                    hashCode = hashCode * 59 + Result.GetHashCode();
                 return hashCode;
             }
         }
