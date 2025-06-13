@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Microservices.BusinessLogic\Microservices.BusinessLogic.csproj" />
     <ProjectReference Include="..\Microservices.Models\Microservices.Models.csproj" />
   </ItemGroup>
 	

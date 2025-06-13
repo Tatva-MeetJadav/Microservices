@@ -1,6 +1,5 @@
 ﻿using Microservices.Common.DTO;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 using System.Net;
 using System.Text.Json;
 
@@ -9,12 +8,10 @@ namespace Microservices.Common.ErrorHandlers
     public class GlobalExceptionMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly ILogger<GlobalExceptionMiddleware> _logger;
 
-        public GlobalExceptionMiddleware(RequestDelegate next, ILogger<GlobalExceptionMiddleware> logger)
+        public GlobalExceptionMiddleware(RequestDelegate next)
         {
             _next = next;
-            _logger = logger;
         }
 
         public async Task InvokeAsync(HttpContext context)
@@ -25,12 +22,11 @@ namespace Microservices.Common.ErrorHandlers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Internal Server Error");
-                await HandleExceptionAsync(context);
+                await HandleExceptionAsync(context,ex);
             }
         }
 
-        private Task HandleExceptionAsync(HttpContext context)
+        private Task HandleExceptionAsync(HttpContext context,Exception ex)
         {
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
@@ -38,7 +34,7 @@ namespace Microservices.Common.ErrorHandlers
             ErrorResponse response = new ErrorResponse
             {
                 StatusCode = context.Response.StatusCode,
-                Message = "Internal Server Error.",
+                Message = ex.Message,
             };
            
             return context.Response.WriteAsync(JsonSerializer.Serialize(response));

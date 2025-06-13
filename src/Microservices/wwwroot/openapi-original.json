@@ -444,11 +444,11 @@
           }
         },
         "properties" : {
-          "result" : {
-            "$ref" : "#/components/schemas/EmailVerificationResponse"
-          },
           "apiResponse" : {
             "$ref" : "#/components/schemas/APIResponse"
+          },
+          "result" : {
+            "$ref" : "#/components/schemas/EmailVerificationResponse"
           }
         },
         "type" : "object"

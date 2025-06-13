@@ -29,7 +29,7 @@ public static class ModelValidationLoggingConfig
                 ValidationError validationError = new ValidationError
                 {
                     StatusCode = 400,
-                    Message = "Model Validation Failed.",
+                    Message = "Model validation failed.",
                     Errors = errors
                 };
 

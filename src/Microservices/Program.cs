@@ -1,4 +1,4 @@
-using Microservices.Common.Logging;
+using Microservices.Common.Utilities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;

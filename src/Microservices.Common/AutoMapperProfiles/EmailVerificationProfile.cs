@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Microservices.BusinessLogic.DTO;
+using Microservices.Models.DTO;
 using Microservices.Models;
 
-namespace Microservices.Common.Mappings
+namespace Microservices.Common.AutoMapperProfiles
 {
     public class EmailVerificationProfile : Profile
     {

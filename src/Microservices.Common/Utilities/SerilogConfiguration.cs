@@ -2,7 +2,7 @@
 using Serilog;
 using Serilog.Sinks.PostgreSQL;
 
-namespace Microservices.Common.Logging
+namespace Microservices.Common.Utilities
 {
     public static class SerilogConfiguration
     {

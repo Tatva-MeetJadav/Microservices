@@ -31,8 +31,8 @@ using FluentValidation.AspNetCore;
 using Microservices.Common.Validations;
 using Microservices.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
-using Microservices.Common.Mappings;
 using Microservices.Common.ErrorHandlers;
+using Microservices.Common.AutoMapperProfiles;
 
 namespace Microservices
 {
@@ -125,7 +125,7 @@ namespace Microservices
 
                 //Injecting services
                 services.AddScoped<IEmailVerificationServices, EmailVerificationServices>();
-                services.AddScoped<IGenericAPIClientServices, GenericAPIClientService>();
+                services.AddScoped<IGenericAPIClientServices, GenericAPIClientServices>();
 
                 //Injecting validation
                 services.AddValidatorsFromAssemblyContaining<EmailVerificationRequestValidator>();
@@ -135,7 +135,7 @@ namespace Microservices
 
                 
                 //Injecting HttpClientService
-                services.AddHttpClient<GenericAPIClientService>();
+                services.AddHttpClient<GenericAPIClientServices>();
         }
 
         /// <summary>
