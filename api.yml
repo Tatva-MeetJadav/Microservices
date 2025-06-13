@@ -44,6 +44,16 @@ paths:
                 success: false
                 message: "A server error occurred. Please try again later."
                 errors: ["Internal server error."]
+        "503":
+          description: Network error.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIResponse"
+              example:
+                success: false
+                message: "A connection error occurred, Please check your connection again."
+                errors: ["Netowork connection error."]
 
 components:
   schemas:

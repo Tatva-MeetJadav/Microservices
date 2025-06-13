@@ -26,11 +26,11 @@ namespace Microservices.Common.ErrorHandlers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Internal Server Error");
-                await HandleExceptionAsync(context, ex);
+                await HandleExceptionAsync(context);
             }
         }
 
-        private Task HandleExceptionAsync(HttpContext context, Exception exception)
+        private Task HandleExceptionAsync(HttpContext context)
         {
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;

@@ -62,6 +62,21 @@
               }
             },
             "description" : "Internal Server Error. An unexpected error occurred on the server."
+          },
+          "503" : {
+            "content" : {
+              "application/json" : {
+                "example" : {
+                  "success" : false,
+                  "message" : "A connection error occurred, Please check your connection again.",
+                  "errors" : [ "Netowork connection error." ]
+                },
+                "schema" : {
+                  "$ref" : "#/components/schemas/APIResponse"
+                }
+              }
+            },
+            "description" : "Network error."
           }
         },
         "summary" : "Verify and score an email address"
