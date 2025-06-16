@@ -36,22 +36,22 @@ namespace Microservices.BusinessLogic.APIClient.Implmentations
                 HttpResponseMessage httpResponse = await _httpClient.GetAsync(url);
                 string json = await httpResponse.Content.ReadAsStringAsync();
                 _logger.LogInformation("Successfully fetched response from API.");
-                return JsonConvert.DeserializeObject<T>("arr") ?? Activator.CreateInstance<T>();
+                return JsonConvert.DeserializeObject<T>(json) ?? Activator.CreateInstance<T>();
             }
             catch (HttpRequestException ex)
             {
                 _logger.LogError(ex, "A network error occurred while making a GET request to {Url}", url);
-                throw new ThirdPartyAPIException(ex.Message,true);
+                throw new ThirdPartyAPIException(ex.Message,"Network error occurred,please check your connection.",true);
             }
             catch (JsonException ex)
             {
                 _logger.LogError(ex, "Failed to deserialize the response from {Url}", url);
-                throw new ThirdPartyAPIException(ex.Message, false);
+                throw new ThirdPartyAPIException(ex.Message, "An unexpected error occurred.", false);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "An unexpected error occurred while making a GET request to {Url}", url);
-                throw new ThirdPartyAPIException(ex.Message, false);
+                throw new ThirdPartyAPIException(ex.Message, "An unexpected error occurred.", false);
             }
         }
     }
