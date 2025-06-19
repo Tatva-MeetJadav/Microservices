@@ -2,16 +2,19 @@
 using Microsoft.AspNetCore.Http;
 using System.Net;
 using System.Text.Json;
+using Serilog;
 
 namespace Microservices.Common.ErrorHandlers
 {
     public class GlobalExceptionMiddleware
     {
         private readonly RequestDelegate _next;
+        private readonly ILogger _logger;
 
-        public GlobalExceptionMiddleware(RequestDelegate next)
+        public GlobalExceptionMiddleware(RequestDelegate next,ILogger logger)
         {
             _next = next;
+            _logger = logger;
         }
 
         public async Task InvokeAsync(HttpContext context)
@@ -22,6 +25,7 @@ namespace Microservices.Common.ErrorHandlers
             }
             catch (Exception ex)
             {
+                _logger.Error("Unexpected error caught by global middleware.");
                 await HandleExceptionAsync(context,ex);
             }
         }

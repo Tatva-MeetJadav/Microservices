@@ -22,10 +22,7 @@ using Newtonsoft.Json.Serialization;
 using Microservices.Filters;
 using Microservices.OpenApi;
 using Microservices.Formatters;
-using Microservices.BusinessLogic.Interfaces;
 using Microservices.BusinessLogic.APIClient.Implmentations;
-using Microservices.BusinessLogic.APIClient.Interfaces;
-using Microservices.BusinessLogic.Implmentations;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microservices.Common.Validations;
@@ -34,6 +31,7 @@ using Microsoft.EntityFrameworkCore;
 using Microservices.Common.ErrorHandlers;
 using Microservices.Common.AutoMapperProfiles;
 using Serilog;
+using Microservices.Common.Utilities;
 
 namespace Microservices
 {
@@ -62,6 +60,7 @@ namespace Microservices
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
+
 
             // Add framework services.
             services
@@ -108,10 +107,15 @@ namespace Microservices
                     c.OperationFilter<GeneratePathParamsValidationFilter>();
                 });
                 services.AddSwaggerGenNewtonsoftSupport();
-                
+
+
+                //Adding Serilog configuration
+                SerilogConfiguration.ConfigureSerilog(Configuration);
 
                 //Adding ModelValidationLogging
                 services.AddModelValidationLogging();
+
+
 
                 //Adding DBContext
                 services.AddDbContext<MicroservicesDBContext>(options =>
@@ -127,8 +131,7 @@ namespace Microservices
                 services.AddAutoMapper(typeof(EmailVerificationProfile).Assembly);
 
                 //Injecting services
-                services.AddScoped<IEmailVerificationServices, EmailVerificationServices>();
-                services.AddScoped<IGenericAPIClientServices, GenericAPIClientServices>();
+                services.AddBusinessLogicServices();
 
                 //Injecting validation
                 services.AddValidatorsFromAssemblyContaining<EmailVerificationRequestValidator>();

@@ -17,11 +17,6 @@ namespace Microservices
         /// <param name="args"></param>
         public static void Main(string[] args)
         {
-            IConfigurationRoot configuration = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json")
-                .Build();
-
-            SerilogConfiguration.ConfigureSerilog(configuration);
             CreateHostBuilder(args).Build().Run();
         }
 
