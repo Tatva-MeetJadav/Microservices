@@ -26,21 +26,37 @@ namespace Microservices.BusinessLogic.Implmentations
         }
         public async Task<EmailVerificationAPIResponse> VerifyEmailAsync(EmailVerificationRequest request)
         {
-            string data = request.Email;
-            _logger.Information("Calling api client service for email verification");
-            EmailVerificationResponseDTO resultDTO = await _apiClient.GetAsync<EmailVerificationResponseDTO>(data, _baseUrl, _apiKey);
-            EmailVerificationResponse result = _mapper.Map<EmailVerificationResponse>(resultDTO);
-            _logger.Information("Successfully fetched response from client service.");
-            return new EmailVerificationAPIResponse
+            if (string.IsNullOrEmpty(request.Email))
             {
-                ApiResponse = new APIResponse
+                string data = request.Email;
+                _logger.Information("Calling api client service for email verification");
+                EmailVerificationResponseDTO resultDTO = await _apiClient.GetAsync<EmailVerificationResponseDTO>(data, _baseUrl, _apiKey);
+                EmailVerificationResponse result = _mapper.Map<EmailVerificationResponse>(resultDTO);
+                _logger.Information("Successfully fetched response from client service.");
+                return new EmailVerificationAPIResponse
                 {
-                    Success = true,
-                    Message = "Operation successfull.",
-                    Errors = null
-                },
-                Result = result,
-            };
+                    ApiResponse = new APIResponse
+                    {
+                        Success = true,
+                        Message = "Operation successfull.",
+                        Errors = null
+                    },
+                    Result = result,
+                };
+            }
+            else
+            {
+                _logger.Error("Email is null or empty found!");
+                return new EmailVerificationAPIResponse
+                {
+                    ApiResponse = new APIResponse
+                    {
+                        Success = false,
+                        Message = "Email should not be empty",
+                        Errors = new List<string> { "Email is empty here, please check again" }
+                    }
+                };
+            }
         }
     }
 }

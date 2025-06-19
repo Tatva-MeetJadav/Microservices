@@ -5,7 +5,7 @@ using Serilog;
 
 namespace Microservices.BusinessLogic.APIClient.Implmentations
 {
-   
+
     public class GenericAPIClientServices : IGenericAPIClientServices
     {
         private readonly HttpClient _httpClient;
@@ -26,7 +26,7 @@ namespace Microservices.BusinessLogic.APIClient.Implmentations
             }
             else
             {
-                _logger.Error("baseUrl and apiKey are required but were not provided.");
+                _logger.Error("baseUrl and apiKey are required but were not provided");
                 throw new ArgumentException("baseUrl and apiKey is required.");
             }
 
@@ -41,7 +41,7 @@ namespace Microservices.BusinessLogic.APIClient.Implmentations
             catch (HttpRequestException ex)
             {
                 _logger.Error(ex, "A network error occurred while making a GET request to {Url}", url);
-                throw new ThirdPartyAPIException(ex.Message,"Network error occurred,please check your connection.",true);
+                throw new ThirdPartyAPIException(ex.Message, "Network error occurred,please check your connection.", true);
             }
             catch (JsonException ex)
             {
