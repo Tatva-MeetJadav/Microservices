@@ -33,6 +33,7 @@ using Microservices.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microservices.Common.ErrorHandlers;
 using Microservices.Common.AutoMapperProfiles;
+using Serilog;
 
 namespace Microservices
 {
@@ -107,6 +108,7 @@ namespace Microservices
                     c.OperationFilter<GeneratePathParamsValidationFilter>();
                 });
                 services.AddSwaggerGenNewtonsoftSupport();
+                
 
                 //Adding ModelValidationLogging
                 services.AddModelValidationLogging();
@@ -119,6 +121,7 @@ namespace Microservices
                     )
                 );
 
+                services.AddSingleton(Log.Logger);
 
                 //Adding profiles of automapper
                 services.AddAutoMapper(typeof(EmailVerificationProfile).Assembly);
@@ -132,8 +135,6 @@ namespace Microservices
                 services.AddFluentValidationAutoValidation();
                 services.AddFluentValidationClientsideAdapters();
 
-
-                
                 //Injecting HttpClientService
                 services.AddHttpClient<GenericAPIClientServices>();
         }
