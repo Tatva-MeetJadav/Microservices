@@ -26,7 +26,7 @@ namespace Microservices.BusinessLogic.Implmentations
         }
         public async Task<EmailVerificationAPIResponse> VerifyEmailAsync(EmailVerificationRequest request)
         {
-            if (string.IsNullOrEmpty(request.Email))
+            if (!string.IsNullOrEmpty(request.Email))
             {
                 string data = request.Email;
                 _logger.Information("Calling api client service for email verification");
