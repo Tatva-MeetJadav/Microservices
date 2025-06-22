@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#nullable enable
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
@@ -13,19 +14,19 @@ namespace Microservices.Models.DTO
         /// Indicates if the email is valid.
         /// </summary>
         [JsonProperty("valid")]
-        public bool Valid { get; set; }
+        public bool? Valid { get; set; }
 
         /// <summary>
         /// Indicates if the verification process timed out.
         /// </summary>
         [JsonProperty("timed_out")]
-        public bool TimedOut { get; set; }
+        public bool? TimedOut { get; set; }
 
         /// <summary>
         /// Indicates if the email address is disposable.
         /// </summary>
         [JsonProperty("disposable")]
-        public bool Disposable { get; set; }
+        public bool? Disposable { get; set; }
 
         /// <summary>
         /// The first name associated with the email address, if available.
@@ -43,55 +44,55 @@ namespace Microservices.Models.DTO
         /// The SMTP score of the email address.
         /// </summary>
         [JsonProperty("smtp_score")]
-        public int SmtpScore { get; set; }
+        public int? SmtpScore { get; set; }
 
         /// <summary>
         /// The overall score for the email address.
         /// </summary>
         [JsonProperty("overall_score")]
-        public int OverallScore { get; set; }
+        public int? OverallScore { get; set; }
 
         /// <summary>
         /// Indicates if the email address is a catch-all address.
         /// </summary>
         [JsonProperty("catch_all")]
-        public bool CatchAll { get; set; }
+        public bool? CatchAll { get; set; }
 
         /// <summary>
         /// Indicates if the email address is generic (e.g., info@, support@).
         /// </summary>
         [JsonProperty("generic")]
-        public bool Generic { get; set; }
+        public bool? Generic { get; set; }
 
         /// <summary>
         /// Indicates if the email address is a common address.
         /// </summary>
         [JsonProperty("common")]
-        public bool Common { get; set; }
+        public bool? Common { get; set; }
 
         /// <summary>
         /// Indicates if the DNS of the domain is valid.
         /// </summary>
         [JsonProperty("dns_valid")]
-        public bool DnsValid { get; set; }
+        public bool? DnsValid { get; set; }
 
         /// <summary>
         /// Indicates if the email address is a honeypot (trap for spam).
         /// </summary>
         [JsonProperty("honeypot")]
-        public bool Honeypot { get; set; }
+        public bool? Honeypot { get; set; }
 
         /// <summary>
         /// Indicates if the owner is a frequent complainer.
         /// </summary>
         [JsonProperty("frequent_complainer")]
-        public bool FrequentComplainer { get; set; }
+        public bool? FrequentComplainer { get; set; }
 
         /// <summary>
         /// Indicates if the email is considered suspect.
         /// </summary>
         [JsonProperty("suspect")]
-        public bool Suspect { get; set; }
+        public bool? Suspect { get; set; }
 
         /// <summary>
         /// Indicates if there has been recent abuse reported for this email.
@@ -103,13 +104,13 @@ namespace Microservices.Models.DTO
         /// The fraud score for the email address.
         /// </summary>
         [JsonProperty("fraud_score")]
-        public int FraudScore { get; set; }
+        public int? FraudScore { get; set; }
 
         /// <summary>
         /// Indicates if the email has been leaked in a breach.
         /// </summary>
         [JsonProperty("leaked")]
-        public bool Leaked { get; set; }
+        public bool? Leaked { get; set; }
 
         /// <summary>
         /// Suggested domain if a typo or issue is detected.
@@ -163,7 +164,7 @@ namespace Microservices.Models.DTO
         /// Indicates if the request was successful.
         /// </summary>
         [JsonProperty("success")]
-        public bool Success { get; set; }
+        public bool? Success { get; set; }
 
         /// <summary>
         /// The spam trap score for the email address.
@@ -175,19 +176,19 @@ namespace Microservices.Models.DTO
         /// Indicates if the top-level domain (TLD) is considered risky.
         /// </summary>
         [JsonProperty("risky_tld")]
-        public bool RiskyTld { get; set; }
+        public bool? RiskyTld { get; set; }
 
         /// <summary>
         /// Indicates if the domain has an SPF record.
         /// </summary>
         [JsonProperty("spf_record")]
-        public bool SpfRecord { get; set; }
+        public bool? SpfRecord { get; set; }
 
         /// <summary>
         /// Indicates if the domain has a DMARC record.
         /// </summary>
         [JsonProperty("dmarc_record")]
-        public bool DmarcRecord { get; set; }
+        public bool? DmarcRecord { get; set; }
 
         /// <summary>
         /// The sanitized version of the email address.
@@ -265,7 +266,7 @@ namespace Microservices.Models.DTO
         /// The timestamp (Unix epoch).
         /// </summary>
         [JsonProperty("timestamp")]
-        public long Timestamp { get; set; }
+        public long? Timestamp { get; set; }
 
         /// <summary>
         /// The ISO date/time string.
