@@ -1,8 +1,8 @@
-﻿using Microservices.Common.DTO;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using System.Net;
 using System.Text.Json;
 using Serilog;
+using Microservices.Models;
 
 namespace Microservices.Common.ErrorHandlers
 {
@@ -30,14 +30,14 @@ namespace Microservices.Common.ErrorHandlers
             }
         }
 
-        private Task HandleExceptionAsync(HttpContext context,Exception ex)
+        private static Task HandleExceptionAsync(HttpContext context,Exception ex)
         {
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
-            ErrorResponse response = new ErrorResponse
+            APIResponse response = new()
             {
-                StatusCode = context.Response.StatusCode,
+                Success= false,
                 Message = ex.Message,
             };
            

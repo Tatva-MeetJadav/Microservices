@@ -1,4 +1,4 @@
-﻿using Microservices.Common.DTO;
+﻿using Microservices.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
@@ -16,24 +16,21 @@ public static class ModelValidationLoggingConfig
         {
             options.InvalidModelStateResponseFactory = context =>
             {
-                List<ErrorDetail> errors = context.ModelState
-                    .Where(x => x.Value?.Errors.Count > 0)
-                    .Select(x => new ErrorDetail
-                    {
-                        Field = x.Key,
-                        ErrorMessages = x.Value?.Errors.Select(e => e.ErrorMessage).ToList()
-                    }).ToList();
+                List<string> errors = context.ModelState
+                 .Where(x => x.Value?.Errors.Count > 0)
+                 .SelectMany(x => x.Value?.Errors.Select(e => e.ErrorMessage) ?? Enumerable.Empty<string>())
+                 .ToList();
+
 
                 Log.Warning("Model validation failed for {Path}. Errors: {@Errors}", context.HttpContext.Request.Path, errors);
 
-                ValidationError validationError = new ValidationError
+                APIResponse response = new()
                 {
-                    StatusCode = 400,
                     Message = "Model validation failed.",
                     Errors = errors
                 };
 
-                return new BadRequestObjectResult(validationError);
+                return new BadRequestObjectResult(response);
             };
         });
 
