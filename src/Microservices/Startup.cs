@@ -138,8 +138,8 @@ namespace Microservices
                 services.AddFluentValidationAutoValidation();
                 services.AddFluentValidationClientsideAdapters();
 
-                //Injecting HttpClientService
-                services.AddHttpClient<GenericAPIClientServices>();
+            //Injecting HttpClientService
+            services.AddHttpClient<GenericAPIClientServices>();
         }
 
         /// <summary>

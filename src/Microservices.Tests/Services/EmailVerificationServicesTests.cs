@@ -37,12 +37,12 @@ namespace Microservices.Tests.BusinessLogic.Implmentations
         }
 
         [Fact]
-        public async Task VerifyEmailAsync_WithValidEmail_ReturnsSuccessResponse()
+        public async Task VerifyEmailAsync_ReturnsSuccessResponse_WhenValidEmail()
         {
             // Arrange
-            EmailVerificationRequest request = EmailVerificationFakers.EmailRequestFaker.Generate();
-            EmailVerificationResponseDTO resultDto = EmailVerificationFakers.EmailResponseDtoFaker.Generate();
-            EmailVerificationResponse result = new ();
+            EmailVerificationRequest request = EmailVerificationRequestFaker.GetFaker();
+            EmailVerificationResponseDTO resultDto = new ();
+            EmailVerificationResponse result = EmailVerificationResponseFaker.GetFaker();
 
             _apiClientMock
                 .Setup(a => a.GetAsync<EmailVerificationResponseDTO>(
@@ -68,7 +68,7 @@ namespace Microservices.Tests.BusinessLogic.Implmentations
         [Theory]
         [InlineData("")]
         [InlineData(null)]
-        public async Task VerifyEmailAsync_WithNullOrEmptyEmail_ReturnsErrorResponse(string email)
+        public async Task VerifyEmailAsync_ReturnsErrorResponse_WhenNullOrEmptyEmail(string email)
         {
             // Arrange
             EmailVerificationRequest request = new () { Email = email };

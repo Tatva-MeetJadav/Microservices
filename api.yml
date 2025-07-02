@@ -54,6 +54,43 @@ paths:
                 success: false
                 message: "A connection error occurred, Please check your connection again."
                 errors: ["Netowork connection error."]
+  /phoneValidate:
+    post:
+      summary: Verify and score an phone number
+      description: Verifies an phone number for validity, risk.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PhoneValidationRequest"
+      responses:
+        "200":
+          description: Email verification result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PhoneValidationResponse"
+        "400":
+          description: Bad Request. The request was invalid or missing required parameters.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                success: false
+                message: "Missing required parameter: email"
+                errors: ["Parameter 'email' is required."]
+        "500":
+          description: Internal Server Error. An unexpected error occurred on the server.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                success: false
+                message: "A server error occurred. Please try again later."
+                errors: ["Internal server error."]
 
 components:
   schemas:
@@ -321,3 +358,113 @@ components:
           $ref: "#/components/schemas/APIResponse"
         result:
           $ref: "#/components/schemas/EmailVerificationResponse"
+    PhoneValidationRequest:
+      type: object
+      required:
+        - phoneNumber
+      properties:
+        phoneNumber:
+          type: string
+          description: Phone number to be verified.
+        country:
+          type: array
+          items:
+            type: string
+          description: (Optional) Country codes to validate against (e.g., ['US', 'UK']).
+        strictness:
+          type: integer
+          enum: [0, 1]
+          description: (Optional) Strictness level for validation (0 = normal, 1 = strictest).
+    PhoneValidationResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Response message from the API.
+        success:
+          type: boolean
+          description: Indicates if the request was successful.
+        formatted:
+          type: string
+          description: Formatted phone number in international format.
+        local_format:
+          type: string
+          description: Phone number in local format.
+        valid:
+          type: boolean
+          description: Whether the phone number is valid.
+        fraud_score:
+          type: integer
+          description: Risk score (0-100, higher means riskier).
+        recent_abuse:
+          type: boolean
+          description: Whether there has been recent abuse from this number.
+        VOIP:
+          type: boolean
+          description: Whether the phone number is a VOIP line.
+        prepaid:
+          type: boolean
+          description: Whether the number is prepaid.
+        risky:
+          type: boolean
+          description: Whether the phone number is considered risky.
+        active:
+          type: boolean
+          description: Whether the phone number is currently active.
+        name:
+          type: string
+          description: Name of the data provider.
+        carrier:
+          type: string
+          description: Carrier name.
+        line_type:
+          type: string
+          description: Type of phone line (e.g., mobile, landline, toll free).
+        country:
+          type: string
+          description: Country code or name.
+        region:
+          type: string
+          description: Region or state.
+        city:
+          type: string
+          description: City.
+        timezone:
+          type: string
+          description: Timezone of the number.
+        zip_code:
+          type: string
+          description: Zip or postal code.
+        accurate_country_code:
+          type: boolean
+          description: Indicates if the detected country code is accurate.
+        dialing_code:
+          type: integer
+          description: International dialing code.
+        leaked:
+          type: boolean
+          description: Whether the number has been leaked.
+        spammer:
+          type: boolean
+          description: Whether the number is associated with spam.
+        mnc:
+          type: string
+          description: Mobile Network Code.
+        mcc:
+          type: string
+          description: Mobile Country Code.
+        request_id:
+          type: string
+          description: Unique ID for the request.
+    ErrorResponse:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+          description: Description of the error that occurred.
+        errorCode:
+          type: integer
+          description: Numeric code representing the error type.
+      required:
+        - errorMessage
+        - errorCode

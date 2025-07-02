@@ -38,6 +38,11 @@ namespace Microservices.BusinessLogic.APIClient.Implmentations
                 _logger.Information("Successfully fetched response from API.");
                 return JsonConvert.DeserializeObject<T>(json) ?? Activator.CreateInstance<T>();
             }
+            catch (TaskCanceledException ex) when (!ex.CancellationToken.IsCancellationRequested)
+            {
+                _logger.Error(ex, "The request to {Url} timed out.", url);
+                throw new ThirdPartyAPIException(ex.Message, "The request timed out. Please try again later.", true);
+            }
             catch (HttpRequestException ex)
             {
                 _logger.Error(ex, "A network error occurred while making a GET request to {Url}", url);
