@@ -3,7 +3,6 @@ using Microservices.Models;
 
 namespace Microservices.Tests.TestData
 {
-
     public static class EmailVerificationRequestFaker
     {
         public static Faker<EmailVerificationRequest> GetFaker()

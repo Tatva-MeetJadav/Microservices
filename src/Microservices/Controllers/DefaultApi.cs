@@ -49,5 +49,41 @@ namespace Microservices.Controllers
         [SwaggerResponse(statusCode: 500, type: typeof(APIResponse), description: "Internal Server Error. An unexpected error occurred on the server.")]
         [SwaggerResponse(statusCode: 503, type: typeof(APIResponse), description: "Network error.")]
         public abstract Task<IActionResult> EmailVerifyPost([FromBody]EmailVerificationRequest emailVerificationRequest);
+
+        /// <summary>
+        /// Verify and score an phone number
+        /// </summary>
+        /// <remarks>Verifies an phone number for validity, risk.</remarks>
+        /// <param name="phoneValidationRequest"></param>
+        /// <response code="200">Email verification result</response>
+        /// <response code="400">Bad Request. The request was invalid or missing required parameters.</response>
+        /// <response code="500">Internal Server Error. An unexpected error occurred on the server.</response>
+        [HttpPost]
+        [Route("/phoneValidate")]
+        [Consumes("application/json")]
+        [ValidateModelState]
+        [SwaggerOperation("PhoneValidatePost")]
+        [SwaggerResponse(statusCode: 200, type: typeof(PhoneValidationResponse), description: "Email verification result")]
+        [SwaggerResponse(statusCode: 400, type: typeof(Error), description: "Bad Request. The request was invalid or missing required parameters.")]
+        [SwaggerResponse(statusCode: 500, type: typeof(Error), description: "Internal Server Error. An unexpected error occurred on the server.")]
+        public abstract Task<IActionResult> PhoneValidatePost([FromBody]PhoneValidationRequest phoneValidationRequest);
+
+        /// <summary>
+        /// This is proxy and vpn detection api
+        /// </summary>
+        /// <remarks>Verifies an ipAddress for validity, risk.</remarks>
+        /// <param name="proxyAndVpnDetectionRequest"></param>
+        /// <response code="200">Proxy and vpn detection result</response>
+        /// <response code="400">Bad Request. The request was invalid or missing required parameters.</response>
+        /// <response code="500">Internal Server Error. An unexpected error occurred on the server.</response>
+        [HttpPost]
+        [Route("/proxyAndVpnDetection")]
+        [Consumes("application/json")]
+        [ValidateModelState]
+        [SwaggerOperation("ProxyAndVpnDetectionPost")]
+        [SwaggerResponse(statusCode: 200, type: typeof(ProxyAndVpnDetectionResponse), description: "Proxy and vpn detection result")]
+        [SwaggerResponse(statusCode: 400, type: typeof(Error), description: "Bad Request. The request was invalid or missing required parameters.")]
+        [SwaggerResponse(statusCode: 500, type: typeof(Error), description: "Internal Server Error. An unexpected error occurred on the server.")]
+        public abstract Task<IActionResult> ProxyAndVpnDetectionPost([FromBody]ProxyAndVpnDetectionRequest proxyAndVpnDetectionRequest);
     }
 }

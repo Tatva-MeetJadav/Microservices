@@ -17,7 +17,12 @@ src/Microservices.Models/EmailVerificationResponseIdentityDataAge.cs
 src/Microservices.Models/EmailVerificationResponseIdentityDataEmailAddresses.cs
 src/Microservices.Models/EmailVerificationResponseIdentityDataNames.cs
 src/Microservices.Models/EmailVerificationResponseIdentityDataPhoneNumbers.cs
+src/Microservices.Models/Error.cs
 src/Microservices.Models/Microservices.Models.csproj
+src/Microservices.Models/PhoneValidationRequest.cs
+src/Microservices.Models/PhoneValidationResponse.cs
+src/Microservices.Models/ProxyAndVpnDetectionRequest.cs
+src/Microservices.Models/ProxyAndVpnDetectionResponse.cs
 src/Microservices/.gitignore
 src/Microservices/Attributes/ValidateModelStateAttribute.cs
 src/Microservices/Authentication/ApiAuthentication.cs

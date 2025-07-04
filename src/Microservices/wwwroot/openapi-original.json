@@ -81,6 +81,102 @@
         },
         "summary" : "Verify and score an email address"
       }
+    },
+    "/phoneValidate" : {
+      "post" : {
+        "description" : "Verifies an phone number for validity, risk.",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/PhoneValidationRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PhoneValidationResponse"
+                }
+              }
+            },
+            "description" : "Email verification result"
+          },
+          "400" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            },
+            "description" : "Bad Request. The request was invalid or missing required parameters."
+          },
+          "500" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            },
+            "description" : "Internal Server Error. An unexpected error occurred on the server."
+          }
+        },
+        "summary" : "Verify and score an phone number"
+      }
+    },
+    "/proxyAndVpnDetection" : {
+      "post" : {
+        "description" : "Verifies an ipAddress for validity, risk.",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ProxyAndVpnDetectionRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ProxyAndVpnDetectionResponse"
+                }
+              }
+            },
+            "description" : "Proxy and vpn detection result"
+          },
+          "400" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            },
+            "description" : "Bad Request. The request was invalid or missing required parameters."
+          },
+          "500" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                }
+              }
+            },
+            "description" : "Internal Server Error. An unexpected error occurred on the server."
+          }
+        },
+        "summary" : "This is proxy and vpn detection api"
+      }
     }
   },
   "components" : {
@@ -449,6 +545,324 @@
           },
           "result" : {
             "$ref" : "#/components/schemas/EmailVerificationResponse"
+          }
+        },
+        "type" : "object"
+      },
+      "PhoneValidationRequest" : {
+        "example" : {
+          "country" : [ "country", "country" ],
+          "phoneNumber" : "phoneNumber",
+          "strictness" : 0
+        },
+        "properties" : {
+          "phoneNumber" : {
+            "description" : "Phone number to be verified.",
+            "type" : "string"
+          },
+          "country" : {
+            "description" : "(Optional) Country codes to validate against (e.g., ['US', 'UK']).",
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "strictness" : {
+            "description" : "(Optional) Strictness level for validation (0 = normal, 1 = strictest).",
+            "enum" : [ 0, 1 ],
+            "type" : "integer"
+          }
+        },
+        "required" : [ "phoneNumber" ],
+        "type" : "object"
+      },
+      "PhoneValidationResponse" : {
+        "example" : {
+          "dialing_code" : 6,
+          "country" : "country",
+          "city" : "city",
+          "formatted" : "formatted",
+          "timezone" : "timezone",
+          "VOIP" : true,
+          "leaked" : true,
+          "mcc" : "mcc",
+          "fraud_score" : 0,
+          "zip_code" : "zip_code",
+          "valid" : true,
+          "recent_abuse" : true,
+          "line_type" : "line_type",
+          "mnc" : "mnc",
+          "spammer" : true,
+          "prepaid" : true,
+          "active" : true,
+          "message" : "message",
+          "carrier" : "carrier",
+          "local_format" : "local_format",
+          "success" : true,
+          "name" : "name",
+          "accurate_country_code" : true,
+          "region" : "region",
+          "risky" : true,
+          "request_id" : "request_id"
+        },
+        "properties" : {
+          "message" : {
+            "description" : "Response message from the API.",
+            "type" : "string"
+          },
+          "success" : {
+            "description" : "Indicates if the request was successful.",
+            "type" : "boolean"
+          },
+          "formatted" : {
+            "description" : "Formatted phone number in international format.",
+            "type" : "string"
+          },
+          "local_format" : {
+            "description" : "Phone number in local format.",
+            "type" : "string"
+          },
+          "valid" : {
+            "description" : "Whether the phone number is valid.",
+            "type" : "boolean"
+          },
+          "fraud_score" : {
+            "description" : "Risk score (0-100, higher means riskier).",
+            "type" : "integer"
+          },
+          "recent_abuse" : {
+            "description" : "Whether there has been recent abuse from this number.",
+            "type" : "boolean"
+          },
+          "VOIP" : {
+            "description" : "Whether the phone number is a VOIP line.",
+            "type" : "boolean"
+          },
+          "prepaid" : {
+            "description" : "Whether the number is prepaid.",
+            "type" : "boolean"
+          },
+          "risky" : {
+            "description" : "Whether the phone number is considered risky.",
+            "type" : "boolean"
+          },
+          "active" : {
+            "description" : "Whether the phone number is currently active.",
+            "type" : "boolean"
+          },
+          "name" : {
+            "description" : "Name of the data provider.",
+            "type" : "string"
+          },
+          "carrier" : {
+            "description" : "Carrier name.",
+            "type" : "string"
+          },
+          "line_type" : {
+            "description" : "Type of phone line (e.g., mobile, landline, toll free).",
+            "type" : "string"
+          },
+          "country" : {
+            "description" : "Country code or name.",
+            "type" : "string"
+          },
+          "region" : {
+            "description" : "Region or state.",
+            "type" : "string"
+          },
+          "city" : {
+            "description" : "City.",
+            "type" : "string"
+          },
+          "timezone" : {
+            "description" : "Timezone of the number.",
+            "type" : "string"
+          },
+          "zip_code" : {
+            "description" : "Zip or postal code.",
+            "type" : "string"
+          },
+          "accurate_country_code" : {
+            "description" : "Indicates if the detected country code is accurate.",
+            "type" : "boolean"
+          },
+          "dialing_code" : {
+            "description" : "International dialing code.",
+            "type" : "integer"
+          },
+          "leaked" : {
+            "description" : "Whether the number has been leaked.",
+            "type" : "boolean"
+          },
+          "spammer" : {
+            "description" : "Whether the number is associated with spam.",
+            "type" : "boolean"
+          },
+          "mnc" : {
+            "description" : "Mobile Network Code.",
+            "type" : "string"
+          },
+          "mcc" : {
+            "description" : "Mobile Country Code.",
+            "type" : "string"
+          },
+          "request_id" : {
+            "description" : "Unique ID for the request.",
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "Error" : {
+        "example" : {
+          "errorMessage" : "errorMessage",
+          "errorCode" : 1
+        },
+        "properties" : {
+          "errorCode" : {
+            "description" : "Numeric code representing the error type.",
+            "type" : "integer"
+          },
+          "errorMessage" : {
+            "description" : "Description of the error that occurred.",
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "ProxyAndVpnDetectionRequest" : {
+        "example" : {
+          "ipAddress" : "8.8.8.0"
+        },
+        "properties" : {
+          "ipAddress" : {
+            "description" : "ipAddress to be verified.",
+            "example" : "8.8.8.0",
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "ProxyAndVpnDetectionResponse" : {
+        "example" : {
+          "zipCode" : "77001",
+          "activeTor" : false,
+          "fraudScore" : 25,
+          "botStatus" : false,
+          "city" : "Houston",
+          "timezone" : "America Matamoros",
+          "ISP" : "Mediacom Cable",
+          "latitude" : 29.7079,
+          "mobile" : false,
+          "recentAbuse" : true,
+          "message" : "Success.",
+          "proxy" : false,
+          "vpn" : false,
+          "success" : true,
+          "countryCode" : "US",
+          "tor" : false,
+          "organization" : "Mediacom Cable",
+          "host" : "192-0-2-110.client.mchsi.com",
+          "isCrawler" : false,
+          "ASN" : 30036,
+          "region" : "Texas",
+          "activeVpn" : false,
+          "longitude" : -95.401
+        },
+        "properties" : {
+          "message" : {
+            "example" : "Success.",
+            "type" : "string"
+          },
+          "success" : {
+            "example" : true,
+            "type" : "boolean"
+          },
+          "fraudScore" : {
+            "example" : 25,
+            "type" : "integer"
+          },
+          "proxy" : {
+            "example" : false,
+            "type" : "boolean"
+          },
+          "ISP" : {
+            "example" : "Mediacom Cable",
+            "type" : "string"
+          },
+          "organization" : {
+            "example" : "Mediacom Cable",
+            "type" : "string"
+          },
+          "ASN" : {
+            "example" : 30036,
+            "type" : "integer"
+          },
+          "host" : {
+            "example" : "192-0-2-110.client.mchsi.com",
+            "type" : "string"
+          },
+          "countryCode" : {
+            "example" : "US",
+            "type" : "string"
+          },
+          "city" : {
+            "example" : "Houston",
+            "type" : "string"
+          },
+          "region" : {
+            "example" : "Texas",
+            "type" : "string"
+          },
+          "isCrawler" : {
+            "example" : false,
+            "type" : "boolean"
+          },
+          "latitude" : {
+            "example" : 29.7079,
+            "format" : "float",
+            "type" : "number"
+          },
+          "longitude" : {
+            "example" : -95.401,
+            "format" : "float",
+            "type" : "number"
+          },
+          "zipCode" : {
+            "example" : "77001",
+            "type" : "string"
+          },
+          "timezone" : {
+            "example" : "America Matamoros",
+            "type" : "string"
+          },
+          "vpn" : {
+            "example" : false,
+            "type" : "boolean"
+          },
+          "tor" : {
+            "example" : false,
+            "type" : "boolean"
+          },
+          "activeVpn" : {
+            "example" : false,
+            "type" : "boolean"
+          },
+          "activeTor" : {
+            "example" : false,
+            "type" : "boolean"
+          },
+          "recentAbuse" : {
+            "example" : true,
+            "type" : "boolean"
+          },
+          "botStatus" : {
+            "example" : false,
+            "type" : "boolean"
+          },
+          "mobile" : {
+            "example" : false,
+            "type" : "boolean"
           }
         },
         "type" : "object"

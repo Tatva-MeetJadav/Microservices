@@ -19,7 +19,7 @@ namespace Microservices.BusinessLogic.Implmentations
         public EmailVerificationServices(IConfiguration configuration, IGenericAPIClientServices apiClient, IMapper mapper, ILogger logger)
         {
             _apiKey = configuration["IPQS:ApiKey"] ?? string.Empty;
-            _baseUrl = configuration["IPQS:BaseUrl"] ?? string.Empty;
+            _baseUrl = configuration["IPQS:EmailVerificationBaseUrl"] ?? string.Empty;
             _apiClient = apiClient;
             _mapper = mapper;
             _logger = logger;

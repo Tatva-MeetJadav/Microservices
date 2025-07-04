@@ -135,6 +135,7 @@ namespace Microservices
 
                 //Injecting validation
                 services.AddValidatorsFromAssemblyContaining<EmailVerificationRequestValidator>();
+                services.AddValidatorsFromAssemblyContaining<ProxyAndVpnDetectionRequestValidator>();
                 services.AddFluentValidationAutoValidation();
                 services.AddFluentValidationClientsideAdapters();
 

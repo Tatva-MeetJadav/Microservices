@@ -17,10 +17,6 @@ namespace Microservices.Tests.Services
         private readonly Mock<HttpMessageHandler> _httpMessageHandlerMock;
         private readonly Mock<ILogger> _loggerMock;
         private readonly GenericAPIClientServices _service;
-        string dummyBaseURL = UrlMock.GetBaseUrlFaker();
-        string dummyApiKey = UrlMock.GetApiKeyFaker();
-        string dummyData = UrlMock.GetDataFaker();
-
         public GenericAPIClientServicesTests()
         {
             _httpMessageHandlerMock = new Mock<HttpMessageHandler>();

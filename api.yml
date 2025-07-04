@@ -76,21 +76,42 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
-              example:
-                success: false
-                message: "Missing required parameter: email"
-                errors: ["Parameter 'email' is required."]
+                $ref: "#/components/schemas/Error"
         "500":
           description: Internal Server Error. An unexpected error occurred on the server.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
-              example:
-                success: false
-                message: "A server error occurred. Please try again later."
-                errors: ["Internal server error."]
+                $ref: "#/components/schemas/Error"
+  /proxyAndVpnDetection:
+    post:
+      summary: This is proxy and vpn detection api
+      description: Verifies an ipAddress for validity, risk.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProxyAndVpnDetectionRequest"
+      responses:
+        "200":
+          description: Proxy and vpn detection result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProxyAndVpnDetectionResponse"
+        "400":
+          description: Bad Request. The request was invalid or missing required parameters.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error. An unexpected error occurred on the server.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
 
 components:
   schemas:
@@ -456,15 +477,93 @@ components:
         request_id:
           type: string
           description: Unique ID for the request.
-    ErrorResponse:
+    Error:
       type: object
       properties:
-        errorMessage:
-          type: string
-          description: Description of the error that occurred.
         errorCode:
           type: integer
           description: Numeric code representing the error type.
-      required:
-        - errorMessage
-        - errorCode
+        errorMessage:
+          type: string
+          description: Description of the error that occurred.
+    ProxyAndVpnDetectionRequest:
+      type: object
+      properties:
+        ipAddress:
+          type: string
+          example: "8.8.8.0"
+          description: ipAddress to be verified.
+    ProxyAndVpnDetectionResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Success."
+        success:
+          type: boolean
+          example: true
+        fraudScore:
+          type: integer
+          example: 25
+        proxy:
+          type: boolean
+          example: false
+        ISP:
+          type: string
+          example: "Mediacom Cable"
+        organization:
+          type: string
+          example: "Mediacom Cable"
+        ASN:
+          type: integer
+          example: 30036
+        host:
+          type: string
+          example: "192-0-2-110.client.mchsi.com"
+        countryCode:
+          type: string
+          example: "US"
+        city:
+          type: string
+          example: "Houston"
+        region:
+          type: string
+          example: "Texas"
+        isCrawler:
+          type: boolean
+          example: false
+        latitude:
+          type: number
+          format: float
+          example: 29.7079
+        longitude:
+          type: number
+          format: float
+          example: -95.401
+        zipCode:
+          type: string
+          example: "77001"
+        timezone:
+          type: string
+          example: "America Matamoros"
+        vpn:
+          type: boolean
+          example: false
+        tor:
+          type: boolean
+          example: false
+        activeVpn:
+          type: boolean
+          example: false
+        activeTor:
+          type: boolean
+          example: false
+        recentAbuse:
+          type: boolean
+          example: true
+        botStatus:
+          type: boolean
+          example: false
+        mobile:
+          type: boolean
+          example: false

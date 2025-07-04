@@ -35,13 +35,13 @@ namespace Microservices.Common.ErrorHandlers
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
-            APIResponse response = new()
+            Error error = new()
             {
-                Success= false,
-                Message = ex.Message,
+                ErrorCode = (int)HttpStatusCode.InternalServerError,
+                ErrorMessage = ex.Message,
             };
            
-            return context.Response.WriteAsync(JsonSerializer.Serialize(response));
+            return context.Response.WriteAsync(JsonSerializer.Serialize(error));
         }
     }
 }

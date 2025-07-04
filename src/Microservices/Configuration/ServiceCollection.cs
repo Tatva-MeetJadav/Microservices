@@ -17,6 +17,7 @@ public static class ServiceCollection
     {
         // Register your services here
         services.AddScoped<IEmailVerificationServices, EmailVerificationServices>();
+        services.AddScoped<IProxyAndVpnDetectionServices, ProxyAndVpnDetectionServices>();
         services.AddScoped<IGenericAPIClientServices, GenericAPIClientServices>();
         return services;
     }
