@@ -53,9 +53,9 @@ namespace Microservices.Implementations
         /// <returns>A response indicating the verification result.</returns>
         public override async Task<IActionResult> ProxyAndVpnDetectionPost([FromBody] ProxyAndVpnDetectionRequest proxyAndVpnDetectionRequest)
         {
-            _logger.Information("Received proxyAndVpnDetection request for: {IpAddress}", proxyAndVpnDetectionRequest.IpAddress);
+            _logger.Information("Received ProxyAndVpnDetection request for: {IpAddress}", proxyAndVpnDetectionRequest.IpAddress);
             ProxyAndVpnDetectionResponse result = await _proxyAndVpnDetectionService.ProxyAndVpnDetectionAsync(proxyAndVpnDetectionRequest);
-            _logger.Information("Email verification succeeded for:  {IpAddress}", proxyAndVpnDetectionRequest.IpAddress);
+            _logger.Information("ProxyAndVpnDetection succeeded for: {IpAddress}", proxyAndVpnDetectionRequest.IpAddress);
             return Ok(result);
         }
     }

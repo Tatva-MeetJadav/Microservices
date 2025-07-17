@@ -25,7 +25,7 @@ namespace Microservices.Common.ErrorHandlers
             }
             catch (Exception ex)
             {
-                _logger.Error("Unexpected error caught by global middleware.");
+                _logger.Error(ex,"Unexpected error caught by global middleware.");
                 await HandleExceptionAsync(context,ex);
             }
         }
