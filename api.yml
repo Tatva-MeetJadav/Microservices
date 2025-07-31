@@ -123,6 +123,7 @@ components:
         email:
           type: string
           description: Email address to be verified.
+          example: "example@example.com"
     EmailVerificationResponse:
       type: object
       properties:
