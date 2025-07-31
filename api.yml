@@ -5,7 +5,7 @@ info:
   description: |
     This API verifies the validity, risk, and deliverability of an email address.
 servers:
-  - url: https://microservices.com
+  - url: http://192.168.0.169:8001
 paths:
   /emailVerify:
     post:
@@ -124,6 +124,7 @@ components:
           type: string
           description: Email address to be verified.
           example: "example@example.com"
+          default: "example@example.com"
     EmailVerificationResponse:
       type: object
       properties:

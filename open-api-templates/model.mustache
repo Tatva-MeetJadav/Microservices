@@ -27,7 +27,9 @@ using {{packageName}}.Converters;
 {{#models}}
 {{#model}}
 namespace {{modelPackage}}
-{ {{#isEnum}}{{>enumClass}}{{/isEnum}}{{^isEnum}}
+{ 
+    {{#isEnum}}{{>enumClass}}{{/isEnum}}
+    {{^isEnum}}
     /// <summary>
     /// {{description}}
     /// </summary>
@@ -67,7 +69,8 @@ namespace {{modelPackage}}
         /// {{description}}{{^description}}Gets or Sets {{{name}}}{{/description}}
         /// </summary>{{#description}}
         /// <value>{{.}}</value>{{/description}}{{#example}}
-        /* <example>{{.}}</example> */{{/example}}{{#required}}
+        /* <example>{{.}}</example> */{{/example}}
+        {{#required}}
         [Required]{{/required}}{{#pattern}}
         [RegularExpression("{{{.}}}")]{{/pattern}}{{#minLength}}{{#maxLength}}
         [StringLength({{maxLength}}, MinimumLength={{minLength}})]{{/maxLength}}{{/minLength}}{{#minLength}}{{^maxLength}}
@@ -75,6 +78,12 @@ namespace {{modelPackage}}
         [MaxLength({{.}})]{{/maxLength}}{{/minLength}}{{#minimum}}{{#maximum}}
         [Range({{minimum}}, {{maximum}})]{{/maximum}}{{/minimum}}
         [DataMember(Name="{{baseName}}", EmitDefaultValue={{#isNullable}}true{{/isNullable}}{{^isNullable}}{{#vendorExtensions.x-is-value-type}}true{{/vendorExtensions.x-is-value-type}}{{^vendorExtensions.x-is-value-type}}false{{/vendorExtensions.x-is-value-type}}{{/isNullable}})]
+        {{#example}}
+        [DefaultValue("{{{example}}}")]
+        {{/example}}
+        {{#defaultValue}}
+        [DefaultValue("{{{.}}}")]
+        {{/defaultValue}}
         {{#isEnum}}
         public {{{datatypeWithEnum}}}{{#isNullable}}?{{/isNullable}} {{name}} { get; set; }{{#defaultValue}} = {{{.}}};{{/defaultValue}}
         {{/isEnum}}

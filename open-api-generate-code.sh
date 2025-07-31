@@ -11,3 +11,4 @@ npx @openapitools/openapi-generator-cli generate -g aspnetcore \
   --additional-properties useSeparateModelProject=true \
   -i api.yml \
   -o .
+  -t \open-api-templates

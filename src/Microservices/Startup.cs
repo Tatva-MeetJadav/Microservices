@@ -60,86 +60,82 @@ namespace Microservices
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-
-
-            // Add framework services.
+                // Add framework services.
             services
-                // Don't need the full MVC stack for an API, see https://andrewlock.net/comparing-startup-between-the-asp-net-core-3-templates/
-                .AddControllers(options => {
-                    options.InputFormatters.Insert(0, new InputFormatterStream());
-                })
-                .AddNewtonsoftJson(opts =>
-                {
-                    opts.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                    opts.SerializerSettings.Converters.Add(new StringEnumConverter
+                    // Don't need the full MVC stack for an API, see https://andrewlock.net/comparing-startup-between-the-asp-net-core-3-templates/
+                    .AddControllers(options => {
+                        options.InputFormatters.Insert(0, new InputFormatterStream());
+                    })
+                    .AddNewtonsoftJson(opts =>
                     {
-                        NamingStrategy = new CamelCaseNamingStrategy()
+                        opts.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                        opts.SerializerSettings.Converters.Add(new StringEnumConverter
+                        {
+                            NamingStrategy = new CamelCaseNamingStrategy()
+                        });
                     });
-                });
             services
-                .AddSwaggerGen(c =>
-                {
-                    c.EnableAnnotations(enableAnnotationsForInheritance: true, enableAnnotationsForPolymorphism: true);
+                    .AddSwaggerGen(c =>
+                    {
+                        //c.SchemaFilter<ExampleSchemaFilter>();
+                        c.EnableAnnotations(enableAnnotationsForInheritance: true, enableAnnotationsForPolymorphism: true);
                     
-                    c.SwaggerDoc("1.0.0", new OpenApiInfo
-                    {
-                        Title = "Email Verification API",
-                        Description = "Email Verification API (ASP.NET Core 7.0)",
-                        TermsOfService = new Uri("https://github.com/openapitools/openapi-generator"),
-                        Contact = new OpenApiContact
+                        c.SwaggerDoc("1.0.0", new OpenApiInfo
                         {
-                            Name = "OpenAPI-Generator Contributors",
-                            Url = new Uri("https://github.com/openapitools/openapi-generator"),
-                            Email = ""
-                        },
-                        License = new OpenApiLicense
-                        {
-                            Name = "NoLicense",
-                            Url = new Uri("http://localhost")
-                        },
-                        Version = "1.0.0",
+                            Title = "Microservices API",
+                            Description = "Microservices API (ASP.NET Core 7.0)",
+                            TermsOfService = new Uri("https://github.com/openapitools/openapi-generator"),
+                            Contact = new OpenApiContact
+                            {
+                                Name = "OpenAPI-Generator Contributors",
+                                Url = new Uri("https://github.com/openapitools/openapi-generator"),
+                                Email = ""
+                            },
+                            License = new OpenApiLicense
+                            {
+                                Name = "NoLicense",
+                                Url = new Uri("http://localhost")
+                            },
+                            Version = "1.0.0",
+                        });
+                        c.CustomSchemaIds(type => type.FriendlyId(true));
+                        c.IncludeXmlComments($"{AppContext.BaseDirectory}{Path.DirectorySeparatorChar}{Assembly.GetExecutingAssembly().GetName().Name}.xml");
+
+                        // Include DataAnnotation attributes on Controller Action parameters as OpenAPI validation rules (e.g required, pattern, ..)
+                        // Use [ValidateModelState] on Actions to actually validate it in C# as well!
+                        c.OperationFilter<GeneratePathParamsValidationFilter>();
                     });
-                    c.CustomSchemaIds(type => type.FriendlyId(true));
-                    c.IncludeXmlComments($"{AppContext.BaseDirectory}{Path.DirectorySeparatorChar}{Assembly.GetExecutingAssembly().GetName().Name}.xml");
 
-                    // Include DataAnnotation attributes on Controller Action parameters as OpenAPI validation rules (e.g required, pattern, ..)
-                    // Use [ValidateModelState] on Actions to actually validate it in C# as well!
-                    c.OperationFilter<GeneratePathParamsValidationFilter>();
-                });
-                services.AddSwaggerGenNewtonsoftSupport();
+            services.AddSwaggerGenNewtonsoftSupport();
 
+            //Adding Serilog configuration
+            SerilogConfiguration.ConfigureSerilog(Configuration);
 
-                //Adding Serilog configuration
-                SerilogConfiguration.ConfigureSerilog(Configuration);
-
-                //Adding ModelValidationLogging
-                services.AddModelValidationLogging();
-
-
+            //Adding ModelValidationLogging
+            services.AddModelValidationLogging();
 
                 //Adding DBContext
-                services.AddDbContext<MicroservicesDBContext>(options =>
-                    options.UseNpgsql(
-                        Configuration.GetConnectionString("DefaultConnection"),
-                        npgsqlOptions => npgsqlOptions.MigrationsAssembly("Microservices.Migrations")
-                    )
-                );
+            services.AddDbContext<MicroservicesDBContext>(options => options.UseNpgsql(
+                    Configuration.GetConnectionString("DefaultConnection"),
+                    npgsqlOptions => npgsqlOptions.MigrationsAssembly("Microservices.Migrations")
+                )
+            );
 
-                services.AddSingleton(Log.Logger);
+            services.AddSingleton(Log.Logger);
 
-                //Adding profiles of automapper
-                services.AddAutoMapper(typeof(EmailVerificationProfile).Assembly);
+            //Adding profiles of automapper
+            services.AddAutoMapper(typeof(EmailVerificationProfile).Assembly);
 
-                //Injecting services
-                services.AddBusinessLogicServices();
+            //Injecting services
+            services.AddBusinessLogicServices();
 
-                //Injecting validation
-                services.AddValidatorsFromAssemblyContaining<EmailVerificationRequestValidator>();
-                services.AddValidatorsFromAssemblyContaining<ProxyAndVpnDetectionRequestValidator>();
-                services.AddFluentValidationAutoValidation();
-                services.AddFluentValidationClientsideAdapters();
+            //Injecting validation
+            services.AddValidatorsFromAssemblyContaining<EmailVerificationRequestValidator>();
+            services.AddValidatorsFromAssemblyContaining<ProxyAndVpnDetectionRequestValidator>();
+            services.AddFluentValidationAutoValidation();
+            services.AddFluentValidationClientsideAdapters();
 
-            //Injecting HttpClientService
+                //Injecting HttpClientService
             services.AddHttpClient<GenericAPIClientServices>();
         }
 
@@ -171,11 +167,10 @@ namespace Microservices
                     // set route prefix to openapi, e.g. http://localhost:8080/openapi/index.html
                     c.RoutePrefix = "swagger";
                     //TODO: Either use the SwaggerGen generated OpenAPI contract (generated from C# classes)
-                    c.SwaggerEndpoint("/openapi-original.json", "Email Verification API");
-
+                    c.SwaggerEndpoint("/openapi/1.0.0/openapi.json", "Microservices API");
                     //TODO: Or alternatively use the original OpenAPI contract that's included in the static files
                     // c.SwaggerEndpoint("/openapi-original.json", "Email Verification API Original");
-
+                    
                 });
             app.UseRouting();
             app.UseEndpoints(endpoints =>

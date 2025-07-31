@@ -1,0 +1,17 @@
+﻿body {
+    background-color: #121212 !important;
+    color: #121212 !important;
+}
+
+.swagger-ui .opblock .opblock-section-header {
+    background-color: #121212 !important;
+}
+.swagger-ui, .swagger-ui * {
+    color: #dddddd !important;
+}
+.swagger-ui select {
+    color:black !important
+}
+.swagger-ui textarea {
+    background:rgb(51, 51, 51) !important;
+}

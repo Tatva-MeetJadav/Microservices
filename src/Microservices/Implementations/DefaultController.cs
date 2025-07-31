@@ -41,13 +41,19 @@ namespace Microservices.Implementations
             return Ok(result);
         }
 
+
+        /// <summary>
+        /// Verifies the provided phone number.
+        /// </summary>
+        /// <param name="phoneValidationRequest">The ProxyAndVpnDetection request payload.</param>
+        /// <returns>A response indicating the verification result.</returns>
         public override Task<IActionResult> PhoneValidatePost([FromBody] PhoneValidationRequest phoneValidationRequest)
         {
             throw new System.NotImplementedException();
         }
 
         /// <summary>
-        /// Verifies the provided email address.
+        /// Verifies the provided ip address.
         /// </summary>
         /// <param name="proxyAndVpnDetectionRequest">The ProxyAndVpnDetection request payload.</param>
         /// <returns>A response indicating the verification result.</returns>
