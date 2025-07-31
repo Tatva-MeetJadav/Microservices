@@ -183,11 +183,12 @@
     "schemas" : {
       "EmailVerificationRequest" : {
         "example" : {
-          "email" : "email"
+          "email" : "example@example.com"
         },
         "properties" : {
           "email" : {
             "description" : "Email address to be verified.",
+            "example" : "example@example.com",
             "type" : "string"
           }
         },
