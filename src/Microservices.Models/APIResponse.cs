@@ -20,6 +20,7 @@ using Microservices.Converters;
 
 namespace Microservices.Models
 { 
+    
     /// <summary>
     /// 
     /// </summary>
@@ -29,19 +30,28 @@ namespace Microservices.Models
         /// <summary>
         /// Gets or Sets Success
         /// </summary>
+
         [DataMember(Name="success", EmitDefaultValue=true)]
+
+
         public bool Success { get; set; }
 
         /// <summary>
         /// Gets or Sets Message
         /// </summary>
+
         [DataMember(Name="message", EmitDefaultValue=false)]
+
+
         public string Message { get; set; }
 
         /// <summary>
         /// Gets or Sets Errors
         /// </summary>
+
         [DataMember(Name="errors", EmitDefaultValue=false)]
+
+
         public List<string> Errors { get; set; }
 
         /// <summary>

@@ -20,6 +20,7 @@ using Microservices.Converters;
 
 namespace Microservices.Models
 { 
+    
     /// <summary>
     /// 
     /// </summary>
@@ -31,8 +32,12 @@ namespace Microservices.Models
         /// </summary>
         /// <value>ipAddress to be verified.</value>
         /* <example>8.8.8.0</example> */
+
         [DataMember(Name="ipAddress", EmitDefaultValue=false)]
-        public string IpAddress { get; set; }
+
+        [DefaultValue("8.8.8.0")]
+
+        public string IpAddress { get; set; } = "8.8.8.0";
 
         /// <summary>
         /// Returns the string presentation of the object

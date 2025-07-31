@@ -20,6 +20,7 @@ using Microservices.Converters;
 
 namespace Microservices.Models
 { 
+    
     /// <summary>
     /// When this email was first detected by the service.
     /// </summary>
@@ -30,21 +31,30 @@ namespace Microservices.Models
         /// Human-readable representation of when first seen.
         /// </summary>
         /// <value>Human-readable representation of when first seen.</value>
+
         [DataMember(Name="human", EmitDefaultValue=false)]
+
+
         public string Human { get; set; }
 
         /// <summary>
         /// Unix timestamp of when first seen.
         /// </summary>
         /// <value>Unix timestamp of when first seen.</value>
+
         [DataMember(Name="timestamp", EmitDefaultValue=true)]
+
+
         public int Timestamp { get; set; }
 
         /// <summary>
         /// ISO 8601 date/time of when first seen.
         /// </summary>
         /// <value>ISO 8601 date/time of when first seen.</value>
+
         [DataMember(Name="iso", EmitDefaultValue=true)]
+
+
         public DateTime Iso { get; set; }
 
         /// <summary>

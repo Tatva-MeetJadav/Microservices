@@ -123,8 +123,8 @@ components:
         email:
           type: string
           description: Email address to be verified.
-          example: "example@example.com"
-          default: "example@example.com"
+          default: example@example.com
+          example: example@example.com
     EmailVerificationResponse:
       type: object
       properties:
@@ -536,11 +536,11 @@ components:
           example: false
         latitude:
           type: number
-          format: float
+          format: double
           example: 29.7079
         longitude:
           type: number
-          format: float
+          format: double
           example: -95.401
         zipCode:
           type: string

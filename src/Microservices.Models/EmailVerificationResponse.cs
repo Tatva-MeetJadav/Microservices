@@ -20,6 +20,7 @@ using Microservices.Converters;
 
 namespace Microservices.Models
 { 
+    
     /// <summary>
     /// 
     /// </summary>
@@ -30,28 +31,40 @@ namespace Microservices.Models
         /// Indicates if the email address is valid (true/false).
         /// </summary>
         /// <value>Indicates if the email address is valid (true/false).</value>
+
         [DataMember(Name="valid", EmitDefaultValue=true)]
+
+
         public bool Valid { get; set; }
 
         /// <summary>
         /// True if the email server did not respond within the expected time.
         /// </summary>
         /// <value>True if the email server did not respond within the expected time.</value>
+
         [DataMember(Name="timedOut", EmitDefaultValue=true)]
+
+
         public bool TimedOut { get; set; }
 
         /// <summary>
         /// True if the email is from a temporary/disposable email provider.
         /// </summary>
         /// <value>True if the email is from a temporary/disposable email provider.</value>
+
         [DataMember(Name="disposable", EmitDefaultValue=true)]
+
+
         public bool Disposable { get; set; }
 
         /// <summary>
         /// First name associated with the email address, if available.
         /// </summary>
         /// <value>First name associated with the email address, if available.</value>
+
         [DataMember(Name="firstName", EmitDefaultValue=false)]
+
+
         public string FirstName { get; set; }
 
 
@@ -87,107 +100,152 @@ namespace Microservices.Models
         /// Likelihood that emails will be delivered to this address (e.g., high, medium, low).
         /// </summary>
         /// <value>Likelihood that emails will be delivered to this address (e.g., high, medium, low).</value>
+
         [DataMember(Name="deliverability", EmitDefaultValue=true)]
+
+
         public DeliverabilityEnum Deliverability { get; set; }
 
         /// <summary>
         /// Numeric score showing how well the email server responds to SMTP checks.
         /// </summary>
         /// <value>Numeric score showing how well the email server responds to SMTP checks.</value>
+
         [Range(-1, 3)]
         [DataMember(Name="smtpScore", EmitDefaultValue=true)]
+
+
         public int SmtpScore { get; set; }
 
         /// <summary>
         /// General risk score for the email address, typically lower is better.
         /// </summary>
         /// <value>General risk score for the email address, typically lower is better.</value>
+
         [Range(0, 4)]
         [DataMember(Name="overallScore", EmitDefaultValue=true)]
+
+
         public int OverallScore { get; set; }
 
         /// <summary>
         /// True if the domain is a &#39;catch-all&#39; and accepts all emails sent to it.
         /// </summary>
         /// <value>True if the domain is a &#39;catch-all&#39; and accepts all emails sent to it.</value>
+
         [DataMember(Name="catchAll", EmitDefaultValue=true)]
+
+
         public bool CatchAll { get; set; }
 
         /// <summary>
         /// True if the email is a generic address (e.g., info@, support@).
         /// </summary>
         /// <value>True if the email is a generic address (e.g., info@, support@).</value>
+
         [DataMember(Name="generic", EmitDefaultValue=true)]
+
+
         public bool Generic { get; set; }
 
         /// <summary>
         /// True if the email address is common or frequently used.
         /// </summary>
         /// <value>True if the email address is common or frequently used.</value>
+
         [DataMember(Name="common", EmitDefaultValue=true)]
+
+
         public bool Common { get; set; }
 
         /// <summary>
         /// True if the domain has valid DNS records for email.
         /// </summary>
         /// <value>True if the domain has valid DNS records for email.</value>
+
         [DataMember(Name="dnsValid", EmitDefaultValue=true)]
+
+
         public bool DnsValid { get; set; }
 
         /// <summary>
         /// True if the email is identified as a spam trap/honeypot.
         /// </summary>
         /// <value>True if the email is identified as a spam trap/honeypot.</value>
+
         [DataMember(Name="honeypot", EmitDefaultValue=true)]
+
+
         public bool Honeypot { get; set; }
 
         /// <summary>
         /// True if this address is known to frequently mark emails as spam.
         /// </summary>
         /// <value>True if this address is known to frequently mark emails as spam.</value>
+
         [DataMember(Name="frequentComplainer", EmitDefaultValue=true)]
+
+
         public bool FrequentComplainer { get; set; }
 
         /// <summary>
         /// True if the email is suspected to be risky, fraudulent, or problematic.
         /// </summary>
         /// <value>True if the email is suspected to be risky, fraudulent, or problematic.</value>
+
         [DataMember(Name="suspect", EmitDefaultValue=true)]
+
+
         public bool Suspect { get; set; }
 
         /// <summary>
         /// True if the email has recently been involved in abuse or spam activity.
         /// </summary>
         /// <value>True if the email has recently been involved in abuse or spam activity.</value>
+
         [DataMember(Name="recentAbuse", EmitDefaultValue=true)]
+
+
         public bool RecentAbuse { get; set; }
 
         /// <summary>
         /// Gets or Sets IdentityData
         /// </summary>
+
         [DataMember(Name="identityData", EmitDefaultValue=false)]
+
+
         public EmailVerificationResponseIdentityData IdentityData { get; set; }
 
         /// <summary>
         /// Numeric score (usually 0-100) representing the risk of fraud for this email.
         /// </summary>
         /// <value>Numeric score (usually 0-100) representing the risk of fraud for this email.</value>
+
         [Range(0, 100)]
         [DataMember(Name="fraudScore", EmitDefaultValue=true)]
+
+
         public int FraudScore { get; set; }
 
         /// <summary>
         /// True if this email address has appeared in data leaks or breaches.
         /// </summary>
         /// <value>True if this email address has appeared in data leaks or breaches.</value>
+
         [DataMember(Name="leaked", EmitDefaultValue=true)]
+
+
         public bool Leaked { get; set; }
 
         /// <summary>
         /// Alternative domain suggestion if the original domain might be a typo.
         /// </summary>
         /// <value>Alternative domain suggestion if the original domain might be a typo.</value>
+
         [DataMember(Name="suggestedDomain", EmitDefaultValue=false)]
+
+
         public string SuggestedDomain { get; set; }
 
 
@@ -229,7 +287,10 @@ namespace Microservices.Models
         /// Indicates how quickly the domain is being used/registered (e.g., high for many new accounts at once).
         /// </summary>
         /// <value>Indicates how quickly the domain is being used/registered (e.g., high for many new accounts at once).</value>
+
         [DataMember(Name="domainVelocity", EmitDefaultValue=true)]
+
+
         public DomainVelocityEnum DomainVelocity { get; set; }
 
 
@@ -283,7 +344,10 @@ namespace Microservices.Models
         /// Level of trust for the domain (e.g., trusted, untrusted).
         /// </summary>
         /// <value>Level of trust for the domain (e.g., trusted, untrusted).</value>
+
         [DataMember(Name="domainTrust", EmitDefaultValue=true)]
+
+
         public DomainTrustEnum DomainTrust { get; set; }
 
 
@@ -325,38 +389,56 @@ namespace Microservices.Models
         /// Level of past user activity associated with this email (high, medium, low).
         /// </summary>
         /// <value>Level of past user activity associated with this email (high, medium, low).</value>
+
         [DataMember(Name="userActivity", EmitDefaultValue=true)]
+
+
         public UserActivityEnum UserActivity { get; set; }
 
         /// <summary>
         /// Gets or Sets AssociatedNames
         /// </summary>
+
         [DataMember(Name="associatedNames", EmitDefaultValue=false)]
+
+
         public EmailVerificationResponseAssociatedNames AssociatedNames { get; set; }
 
         /// <summary>
         /// Gets or Sets AssociatedPhoneNumbers
         /// </summary>
+
         [DataMember(Name="associatedPhoneNumbers", EmitDefaultValue=false)]
+
+
         public EmailVerificationResponseAssociatedPhoneNumbers AssociatedPhoneNumbers { get; set; }
 
         /// <summary>
         /// Gets or Sets FirstSeen
         /// </summary>
+
         [DataMember(Name="firstSeen", EmitDefaultValue=false)]
+
+
         public EmailVerificationResponseFirstSeen FirstSeen { get; set; }
 
         /// <summary>
         /// Gets or Sets DomainAge
         /// </summary>
+
         [DataMember(Name="domainAge", EmitDefaultValue=false)]
+
+
         public EmailVerificationResponseDomainAge DomainAge { get; set; }
 
         /// <summary>
         /// True if the API request was completed successfully.
         /// </summary>
         /// <value>True if the API request was completed successfully.</value>
+
         [DataMember(Name="success", EmitDefaultValue=true)]
+
+
         public bool Success { get; set; }
 
 
@@ -398,56 +480,80 @@ namespace Microservices.Models
         /// Indicates spam trap risk (e.g., none, low, medium, high).
         /// </summary>
         /// <value>Indicates spam trap risk (e.g., none, low, medium, high).</value>
+
         [DataMember(Name="spamTrapScore", EmitDefaultValue=true)]
+
+
         public SpamTrapScoreEnum SpamTrapScore { get; set; }
 
         /// <summary>
         /// True if the top-level domain (TLD) is considered risky (e.g., .xyz, .top).
         /// </summary>
         /// <value>True if the top-level domain (TLD) is considered risky (e.g., .xyz, .top).</value>
+
         [DataMember(Name="riskyTld", EmitDefaultValue=true)]
+
+
         public bool RiskyTld { get; set; }
 
         /// <summary>
         /// True if the domain has a valid SPF (Sender Policy Framework) record.
         /// </summary>
         /// <value>True if the domain has a valid SPF (Sender Policy Framework) record.</value>
+
         [DataMember(Name="spfRecord", EmitDefaultValue=true)]
+
+
         public bool SpfRecord { get; set; }
 
         /// <summary>
         /// True if the domain has a valid DMARC record.
         /// </summary>
         /// <value>True if the domain has a valid DMARC record.</value>
+
         [DataMember(Name="dmarcRecord", EmitDefaultValue=true)]
+
+
         public bool DmarcRecord { get; set; }
 
         /// <summary>
         /// The standardized/cleaned version of the input email address.
         /// </summary>
         /// <value>The standardized/cleaned version of the input email address.</value>
+
         [DataMember(Name="sanitizedEmail", EmitDefaultValue=false)]
+
+
         public string SanitizedEmail { get; set; }
 
         /// <summary>
         /// List of mail exchange (MX) servers for the domain.
         /// </summary>
         /// <value>List of mail exchange (MX) servers for the domain.</value>
+
         [DataMember(Name="mxRecords", EmitDefaultValue=false)]
+
+
         public List<string> MxRecords { get; set; }
 
         /// <summary>
         /// Unique identifier for this API request, useful for troubleshooting.
         /// </summary>
         /// <value>Unique identifier for this API request, useful for troubleshooting.</value>
+
         [DataMember(Name="requestId", EmitDefaultValue=false)]
+
+
         public string RequestId { get; set; }
 
         /// <summary>
         /// List of A (address) records for the domain, representing IP addresses.
         /// </summary>
         /// <value>List of A (address) records for the domain, representing IP addresses.</value>
+
         [DataMember(Name="aRecords", EmitDefaultValue=false)]
+
+
         public List<string> ARecords { get; set; }
 
         /// <summary>

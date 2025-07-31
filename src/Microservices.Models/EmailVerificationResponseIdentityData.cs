@@ -20,6 +20,7 @@ using Microservices.Converters;
 
 namespace Microservices.Models
 { 
+    
     /// <summary>
     /// Identity and enrichment information associated with the email address.
     /// </summary>
@@ -29,31 +30,46 @@ namespace Microservices.Models
         /// <summary>
         /// Gets or Sets Names
         /// </summary>
+
         [DataMember(Name="names", EmitDefaultValue=false)]
+
+
         public EmailVerificationResponseIdentityDataNames Names { get; set; }
 
         /// <summary>
         /// Gets or Sets Addresses
         /// </summary>
+
         [DataMember(Name="addresses", EmitDefaultValue=false)]
+
+
         public EmailVerificationResponseIdentityDataAddresses Addresses { get; set; }
 
         /// <summary>
         /// Gets or Sets EmailAddresses
         /// </summary>
+
         [DataMember(Name="emailAddresses", EmitDefaultValue=false)]
+
+
         public EmailVerificationResponseIdentityDataEmailAddresses EmailAddresses { get; set; }
 
         /// <summary>
         /// Gets or Sets PhoneNumbers
         /// </summary>
+
         [DataMember(Name="phoneNumbers", EmitDefaultValue=false)]
+
+
         public EmailVerificationResponseIdentityDataPhoneNumbers PhoneNumbers { get; set; }
 
         /// <summary>
         /// Gets or Sets Age
         /// </summary>
+
         [DataMember(Name="age", EmitDefaultValue=false)]
+
+
         public EmailVerificationResponseIdentityDataAge Age { get; set; }
 
         /// <summary>

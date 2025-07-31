@@ -20,6 +20,7 @@ using Microservices.Converters;
 
 namespace Microservices.Models
 { 
+    
     /// <summary>
     /// Data on when the domain was first registered or seen.
     /// </summary>
@@ -30,21 +31,30 @@ namespace Microservices.Models
         /// Human-readable representation of domain age.
         /// </summary>
         /// <value>Human-readable representation of domain age.</value>
+
         [DataMember(Name="human", EmitDefaultValue=false)]
+
+
         public string Human { get; set; }
 
         /// <summary>
         /// Unix timestamp of domain age.
         /// </summary>
         /// <value>Unix timestamp of domain age.</value>
+
         [DataMember(Name="timestamp", EmitDefaultValue=true)]
+
+
         public int Timestamp { get; set; }
 
         /// <summary>
         /// ISO 8601 date/time of domain age.
         /// </summary>
         /// <value>ISO 8601 date/time of domain age.</value>
+
         [DataMember(Name="iso", EmitDefaultValue=true)]
+
+
         public DateTime Iso { get; set; }
 
         /// <summary>

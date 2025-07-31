@@ -20,6 +20,7 @@ using Microservices.Converters;
 
 namespace Microservices.Models
 { 
+    
     /// <summary>
     /// 
     /// </summary>
@@ -30,182 +31,260 @@ namespace Microservices.Models
         /// Response message from the API.
         /// </summary>
         /// <value>Response message from the API.</value>
+
         [DataMember(Name="message", EmitDefaultValue=false)]
+
+
         public string Message { get; set; }
 
         /// <summary>
         /// Indicates if the request was successful.
         /// </summary>
         /// <value>Indicates if the request was successful.</value>
+
         [DataMember(Name="success", EmitDefaultValue=true)]
+
+
         public bool Success { get; set; }
 
         /// <summary>
         /// Formatted phone number in international format.
         /// </summary>
         /// <value>Formatted phone number in international format.</value>
+
         [DataMember(Name="formatted", EmitDefaultValue=false)]
+
+
         public string Formatted { get; set; }
 
         /// <summary>
         /// Phone number in local format.
         /// </summary>
         /// <value>Phone number in local format.</value>
+
         [DataMember(Name="local_format", EmitDefaultValue=false)]
+
+
         public string LocalFormat { get; set; }
 
         /// <summary>
         /// Whether the phone number is valid.
         /// </summary>
         /// <value>Whether the phone number is valid.</value>
+
         [DataMember(Name="valid", EmitDefaultValue=true)]
+
+
         public bool Valid { get; set; }
 
         /// <summary>
         /// Risk score (0-100, higher means riskier).
         /// </summary>
         /// <value>Risk score (0-100, higher means riskier).</value>
+
         [DataMember(Name="fraud_score", EmitDefaultValue=true)]
+
+
         public int FraudScore { get; set; }
 
         /// <summary>
         /// Whether there has been recent abuse from this number.
         /// </summary>
         /// <value>Whether there has been recent abuse from this number.</value>
+
         [DataMember(Name="recent_abuse", EmitDefaultValue=true)]
+
+
         public bool RecentAbuse { get; set; }
 
         /// <summary>
         /// Whether the phone number is a VOIP line.
         /// </summary>
         /// <value>Whether the phone number is a VOIP line.</value>
+
         [DataMember(Name="VOIP", EmitDefaultValue=true)]
+
+
         public bool VOIP { get; set; }
 
         /// <summary>
         /// Whether the number is prepaid.
         /// </summary>
         /// <value>Whether the number is prepaid.</value>
+
         [DataMember(Name="prepaid", EmitDefaultValue=true)]
+
+
         public bool Prepaid { get; set; }
 
         /// <summary>
         /// Whether the phone number is considered risky.
         /// </summary>
         /// <value>Whether the phone number is considered risky.</value>
+
         [DataMember(Name="risky", EmitDefaultValue=true)]
+
+
         public bool Risky { get; set; }
 
         /// <summary>
         /// Whether the phone number is currently active.
         /// </summary>
         /// <value>Whether the phone number is currently active.</value>
+
         [DataMember(Name="active", EmitDefaultValue=true)]
+
+
         public bool Active { get; set; }
 
         /// <summary>
         /// Name of the data provider.
         /// </summary>
         /// <value>Name of the data provider.</value>
+
         [DataMember(Name="name", EmitDefaultValue=false)]
+
+
         public string Name { get; set; }
 
         /// <summary>
         /// Carrier name.
         /// </summary>
         /// <value>Carrier name.</value>
+
         [DataMember(Name="carrier", EmitDefaultValue=false)]
+
+
         public string Carrier { get; set; }
 
         /// <summary>
         /// Type of phone line (e.g., mobile, landline, toll free).
         /// </summary>
         /// <value>Type of phone line (e.g., mobile, landline, toll free).</value>
+
         [DataMember(Name="line_type", EmitDefaultValue=false)]
+
+
         public string LineType { get; set; }
 
         /// <summary>
         /// Country code or name.
         /// </summary>
         /// <value>Country code or name.</value>
+
         [DataMember(Name="country", EmitDefaultValue=false)]
+
+
         public string Country { get; set; }
 
         /// <summary>
         /// Region or state.
         /// </summary>
         /// <value>Region or state.</value>
+
         [DataMember(Name="region", EmitDefaultValue=false)]
+
+
         public string Region { get; set; }
 
         /// <summary>
         /// City.
         /// </summary>
         /// <value>City.</value>
+
         [DataMember(Name="city", EmitDefaultValue=false)]
+
+
         public string City { get; set; }
 
         /// <summary>
         /// Timezone of the number.
         /// </summary>
         /// <value>Timezone of the number.</value>
+
         [DataMember(Name="timezone", EmitDefaultValue=false)]
+
+
         public string Timezone { get; set; }
 
         /// <summary>
         /// Zip or postal code.
         /// </summary>
         /// <value>Zip or postal code.</value>
+
         [DataMember(Name="zip_code", EmitDefaultValue=false)]
+
+
         public string ZipCode { get; set; }
 
         /// <summary>
         /// Indicates if the detected country code is accurate.
         /// </summary>
         /// <value>Indicates if the detected country code is accurate.</value>
+
         [DataMember(Name="accurate_country_code", EmitDefaultValue=true)]
+
+
         public bool AccurateCountryCode { get; set; }
 
         /// <summary>
         /// International dialing code.
         /// </summary>
         /// <value>International dialing code.</value>
+
         [DataMember(Name="dialing_code", EmitDefaultValue=true)]
+
+
         public int DialingCode { get; set; }
 
         /// <summary>
         /// Whether the number has been leaked.
         /// </summary>
         /// <value>Whether the number has been leaked.</value>
+
         [DataMember(Name="leaked", EmitDefaultValue=true)]
+
+
         public bool Leaked { get; set; }
 
         /// <summary>
         /// Whether the number is associated with spam.
         /// </summary>
         /// <value>Whether the number is associated with spam.</value>
+
         [DataMember(Name="spammer", EmitDefaultValue=true)]
+
+
         public bool Spammer { get; set; }
 
         /// <summary>
         /// Mobile Network Code.
         /// </summary>
         /// <value>Mobile Network Code.</value>
+
         [DataMember(Name="mnc", EmitDefaultValue=false)]
+
+
         public string Mnc { get; set; }
 
         /// <summary>
         /// Mobile Country Code.
         /// </summary>
         /// <value>Mobile Country Code.</value>
+
         [DataMember(Name="mcc", EmitDefaultValue=false)]
+
+
         public string Mcc { get; set; }
 
         /// <summary>
         /// Unique ID for the request.
         /// </summary>
         /// <value>Unique ID for the request.</value>
+
         [DataMember(Name="request_id", EmitDefaultValue=false)]
+
+
         public string RequestId { get; set; }
 
         /// <summary>

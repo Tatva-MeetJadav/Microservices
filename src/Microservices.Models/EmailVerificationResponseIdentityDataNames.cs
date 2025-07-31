@@ -20,6 +20,7 @@ using Microservices.Converters;
 
 namespace Microservices.Models
 { 
+    
     /// <summary>
     /// An object containing names associated with the email address.
     /// </summary>
@@ -30,21 +31,30 @@ namespace Microservices.Models
         /// Their first name.
         /// </summary>
         /// <value>Their first name.</value>
+
         [DataMember(Name="firstName", EmitDefaultValue=false)]
+
+
         public string FirstName { get; set; }
 
         /// <summary>
         /// Their last name.
         /// </summary>
         /// <value>Their last name.</value>
+
         [DataMember(Name="lastName", EmitDefaultValue=false)]
+
+
         public string LastName { get; set; }
 
         /// <summary>
         /// Their middle name.
         /// </summary>
         /// <value>Their middle name.</value>
+
         [DataMember(Name="middleName", EmitDefaultValue=false)]
+
+
         public string MiddleName { get; set; }
 
         /// <summary>

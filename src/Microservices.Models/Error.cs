@@ -20,6 +20,7 @@ using Microservices.Converters;
 
 namespace Microservices.Models
 { 
+    
     /// <summary>
     /// 
     /// </summary>
@@ -30,14 +31,20 @@ namespace Microservices.Models
         /// Numeric code representing the error type.
         /// </summary>
         /// <value>Numeric code representing the error type.</value>
+
         [DataMember(Name="errorCode", EmitDefaultValue=true)]
+
+
         public int ErrorCode { get; set; }
 
         /// <summary>
         /// Description of the error that occurred.
         /// </summary>
         /// <value>Description of the error that occurred.</value>
+
         [DataMember(Name="errorMessage", EmitDefaultValue=false)]
+
+
         public string ErrorMessage { get; set; }
 
         /// <summary>

@@ -20,6 +20,7 @@ using Microservices.Converters;
 
 namespace Microservices.Models
 { 
+    
     /// <summary>
     /// Phone numbers associated with the email address (may require higher subscription).
     /// </summary>
@@ -30,14 +31,20 @@ namespace Microservices.Models
         /// Status of data availability (e.g., \&quot;Enterprise Plus or higher required.\&quot;).
         /// </summary>
         /// <value>Status of data availability (e.g., \&quot;Enterprise Plus or higher required.\&quot;).</value>
+
         [DataMember(Name="status", EmitDefaultValue=false)]
+
+
         public string Status { get; set; }
 
         /// <summary>
         /// List of associated phone numbers.
         /// </summary>
         /// <value>List of associated phone numbers.</value>
+
         [DataMember(Name="phoneNumbers", EmitDefaultValue=false)]
+
+
         public List<string> PhoneNumbers { get; set; }
 
         /// <summary>

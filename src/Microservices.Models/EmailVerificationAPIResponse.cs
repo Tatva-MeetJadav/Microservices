@@ -20,6 +20,7 @@ using Microservices.Converters;
 
 namespace Microservices.Models
 { 
+    
     /// <summary>
     /// 
     /// </summary>
@@ -29,13 +30,19 @@ namespace Microservices.Models
         /// <summary>
         /// Gets or Sets ApiResponse
         /// </summary>
+
         [DataMember(Name="apiResponse", EmitDefaultValue=false)]
+
+
         public APIResponse ApiResponse { get; set; }
 
         /// <summary>
         /// Gets or Sets Result
         /// </summary>
+
         [DataMember(Name="result", EmitDefaultValue=false)]
+
+
         public EmailVerificationResponse Result { get; set; }
 
         /// <summary>

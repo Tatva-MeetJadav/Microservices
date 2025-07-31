@@ -20,6 +20,7 @@ using Microservices.Converters;
 
 namespace Microservices.Models
 { 
+    
     /// <summary>
     /// An object containing physical addresses associated with the email address.
     /// </summary>
@@ -30,35 +31,50 @@ namespace Microservices.Models
         /// The street address.
         /// </summary>
         /// <value>The street address.</value>
+
         [DataMember(Name="address", EmitDefaultValue=false)]
+
+
         public string Address { get; set; }
 
         /// <summary>
         /// The city.
         /// </summary>
         /// <value>The city.</value>
+
         [DataMember(Name="city", EmitDefaultValue=false)]
+
+
         public string City { get; set; }
 
         /// <summary>
         /// The state or region.
         /// </summary>
         /// <value>The state or region.</value>
+
         [DataMember(Name="region", EmitDefaultValue=false)]
+
+
         public string Region { get; set; }
 
         /// <summary>
         /// The postal code.
         /// </summary>
         /// <value>The postal code.</value>
+
         [DataMember(Name="postalCode", EmitDefaultValue=false)]
+
+
         public string PostalCode { get; set; }
 
         /// <summary>
         /// The country.
         /// </summary>
         /// <value>The country.</value>
+
         [DataMember(Name="country", EmitDefaultValue=false)]
+
+
         public string Country { get; set; }
 
         /// <summary>

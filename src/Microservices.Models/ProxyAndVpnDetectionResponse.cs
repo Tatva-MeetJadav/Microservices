@@ -20,6 +20,7 @@ using Microservices.Converters;
 
 namespace Microservices.Models
 { 
+    
     /// <summary>
     /// 
     /// </summary>
@@ -30,162 +31,254 @@ namespace Microservices.Models
         /// Gets or Sets Message
         /// </summary>
         /* <example>Success.</example> */
+
         [DataMember(Name="message", EmitDefaultValue=false)]
-        public string Message { get; set; }
+
+        [DefaultValue("Success.")]
+
+        public string Message { get; set; } = "Success.";
 
         /// <summary>
         /// Gets or Sets Success
         /// </summary>
         /* <example>true</example> */
+
         [DataMember(Name="success", EmitDefaultValue=true)]
-        public bool Success { get; set; }
+
+        [DefaultValue(true)]
+
+        public bool Success { get; set; } = true;
 
         /// <summary>
         /// Gets or Sets FraudScore
         /// </summary>
         /* <example>25</example> */
+
         [DataMember(Name="fraudScore", EmitDefaultValue=true)]
-        public int FraudScore { get; set; }
+
+        [DefaultValue(25)]
+
+        public int FraudScore { get; set; } = 25;
 
         /// <summary>
         /// Gets or Sets Proxy
         /// </summary>
         /* <example>false</example> */
+
         [DataMember(Name="proxy", EmitDefaultValue=true)]
-        public bool Proxy { get; set; }
+
+        [DefaultValue(false)]
+
+        public bool Proxy { get; set; } = false;
 
         /// <summary>
         /// Gets or Sets ISP
         /// </summary>
         /* <example>Mediacom Cable</example> */
+
         [DataMember(Name="ISP", EmitDefaultValue=false)]
-        public string ISP { get; set; }
+
+        [DefaultValue("Mediacom Cable")]
+
+        public string ISP { get; set; } = "Mediacom Cable";
 
         /// <summary>
         /// Gets or Sets Organization
         /// </summary>
         /* <example>Mediacom Cable</example> */
+
         [DataMember(Name="organization", EmitDefaultValue=false)]
-        public string Organization { get; set; }
+
+        [DefaultValue("Mediacom Cable")]
+
+        public string Organization { get; set; } = "Mediacom Cable";
 
         /// <summary>
         /// Gets or Sets ASN
         /// </summary>
         /* <example>30036</example> */
+
         [DataMember(Name="ASN", EmitDefaultValue=true)]
-        public int ASN { get; set; }
+
+        [DefaultValue(30036)]
+
+        public int ASN { get; set; } = 30036;
 
         /// <summary>
         /// Gets or Sets Host
         /// </summary>
         /* <example>192-0-2-110.client.mchsi.com</example> */
+
         [DataMember(Name="host", EmitDefaultValue=false)]
-        public string Host { get; set; }
+
+        [DefaultValue("192-0-2-110.client.mchsi.com")]
+
+        public string Host { get; set; } = "192-0-2-110.client.mchsi.com";
 
         /// <summary>
         /// Gets or Sets CountryCode
         /// </summary>
         /* <example>US</example> */
+
         [DataMember(Name="countryCode", EmitDefaultValue=false)]
-        public string CountryCode { get; set; }
+
+        [DefaultValue("US")]
+
+        public string CountryCode { get; set; } = "US";
 
         /// <summary>
         /// Gets or Sets City
         /// </summary>
         /* <example>Houston</example> */
+
         [DataMember(Name="city", EmitDefaultValue=false)]
-        public string City { get; set; }
+
+        [DefaultValue("Houston")]
+
+        public string City { get; set; } = "Houston";
 
         /// <summary>
         /// Gets or Sets Region
         /// </summary>
         /* <example>Texas</example> */
+
         [DataMember(Name="region", EmitDefaultValue=false)]
-        public string Region { get; set; }
+
+        [DefaultValue("Texas")]
+
+        public string Region { get; set; } = "Texas";
 
         /// <summary>
         /// Gets or Sets IsCrawler
         /// </summary>
         /* <example>false</example> */
+
         [DataMember(Name="isCrawler", EmitDefaultValue=true)]
-        public bool IsCrawler { get; set; }
+
+        [DefaultValue(false)]
+
+        public bool IsCrawler { get; set; } = false;
 
         /// <summary>
         /// Gets or Sets Latitude
         /// </summary>
         /* <example>29.7079</example> */
+
         [DataMember(Name="latitude", EmitDefaultValue=true)]
-        public float Latitude { get; set; }
+
+        [DefaultValue(29.7079)]
+
+        public double Latitude { get; set; } = 29.7079;
 
         /// <summary>
         /// Gets or Sets Longitude
         /// </summary>
         /* <example>-95.401</example> */
+
         [DataMember(Name="longitude", EmitDefaultValue=true)]
-        public float Longitude { get; set; }
+
+        [DefaultValue(-95.401)]
+
+        public double Longitude { get; set; } = -95.401;
 
         /// <summary>
         /// Gets or Sets ZipCode
         /// </summary>
         /* <example>77001</example> */
+
         [DataMember(Name="zipCode", EmitDefaultValue=false)]
-        public string ZipCode { get; set; }
+
+        [DefaultValue("77001")]
+
+        public string ZipCode { get; set; } = "77001";
 
         /// <summary>
         /// Gets or Sets Timezone
         /// </summary>
         /* <example>America Matamoros</example> */
+
         [DataMember(Name="timezone", EmitDefaultValue=false)]
-        public string Timezone { get; set; }
+
+        [DefaultValue("America Matamoros")]
+
+        public string Timezone { get; set; } = "America Matamoros";
 
         /// <summary>
         /// Gets or Sets Vpn
         /// </summary>
         /* <example>false</example> */
+
         [DataMember(Name="vpn", EmitDefaultValue=true)]
-        public bool Vpn { get; set; }
+
+        [DefaultValue(false)]
+
+        public bool Vpn { get; set; } = false;
 
         /// <summary>
         /// Gets or Sets Tor
         /// </summary>
         /* <example>false</example> */
+
         [DataMember(Name="tor", EmitDefaultValue=true)]
-        public bool Tor { get; set; }
+
+        [DefaultValue(false)]
+
+        public bool Tor { get; set; } = false;
 
         /// <summary>
         /// Gets or Sets ActiveVpn
         /// </summary>
         /* <example>false</example> */
+
         [DataMember(Name="activeVpn", EmitDefaultValue=true)]
-        public bool ActiveVpn { get; set; }
+
+        [DefaultValue(false)]
+
+        public bool ActiveVpn { get; set; } = false;
 
         /// <summary>
         /// Gets or Sets ActiveTor
         /// </summary>
         /* <example>false</example> */
+
         [DataMember(Name="activeTor", EmitDefaultValue=true)]
-        public bool ActiveTor { get; set; }
+
+        [DefaultValue(false)]
+
+        public bool ActiveTor { get; set; } = false;
 
         /// <summary>
         /// Gets or Sets RecentAbuse
         /// </summary>
         /* <example>true</example> */
+
         [DataMember(Name="recentAbuse", EmitDefaultValue=true)]
-        public bool RecentAbuse { get; set; }
+
+        [DefaultValue(true)]
+
+        public bool RecentAbuse { get; set; } = true;
 
         /// <summary>
         /// Gets or Sets BotStatus
         /// </summary>
         /* <example>false</example> */
+
         [DataMember(Name="botStatus", EmitDefaultValue=true)]
-        public bool BotStatus { get; set; }
+
+        [DefaultValue(false)]
+
+        public bool BotStatus { get; set; } = false;
 
         /// <summary>
         /// Gets or Sets Mobile
         /// </summary>
         /* <example>false</example> */
+
         [DataMember(Name="mobile", EmitDefaultValue=true)]
-        public bool Mobile { get; set; }
+
+        [DefaultValue(false)]
+
+        public bool Mobile { get; set; } = false;
 
         /// <summary>
         /// Returns the string presentation of the object

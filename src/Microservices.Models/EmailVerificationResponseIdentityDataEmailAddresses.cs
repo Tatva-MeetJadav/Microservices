@@ -20,6 +20,7 @@ using Microservices.Converters;
 
 namespace Microservices.Models
 { 
+    
     /// <summary>
     /// An object containing other email addresses associated with the email address.
     /// </summary>
@@ -30,21 +31,30 @@ namespace Microservices.Models
         /// The email address.
         /// </summary>
         /// <value>The email address.</value>
+
         [DataMember(Name="email", EmitDefaultValue=false)]
+
+
         public string Email { get; set; }
 
         /// <summary>
         /// When the email address was first created.
         /// </summary>
         /// <value>When the email address was first created.</value>
+
         [DataMember(Name="firstSeen", EmitDefaultValue=true)]
+
+
         public DateTime FirstSeen { get; set; }
 
         /// <summary>
         /// When the email address was last used.
         /// </summary>
         /// <value>When the email address was last used.</value>
+
         [DataMember(Name="lastSeen", EmitDefaultValue=true)]
+
+
         public DateTime LastSeen { get; set; }
 
         /// <summary>

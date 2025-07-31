@@ -20,6 +20,7 @@ using Microservices.Converters;
 
 namespace Microservices.Models
 { 
+    
     /// <summary>
     /// 
     /// </summary>
@@ -32,13 +33,18 @@ namespace Microservices.Models
         /// <value>Phone number to be verified.</value>
         [Required]
         [DataMember(Name="phoneNumber", EmitDefaultValue=false)]
+
+
         public string PhoneNumber { get; set; }
 
         /// <summary>
         /// (Optional) Country codes to validate against (e.g., [&#39;US&#39;, &#39;UK&#39;]).
         /// </summary>
         /// <value>(Optional) Country codes to validate against (e.g., [&#39;US&#39;, &#39;UK&#39;]).</value>
+
         [DataMember(Name="country", EmitDefaultValue=false)]
+
+
         public List<string> Country { get; set; }
 
 
@@ -67,7 +73,10 @@ namespace Microservices.Models
         /// (Optional) Strictness level for validation (0 &#x3D; normal, 1 &#x3D; strictest).
         /// </summary>
         /// <value>(Optional) Strictness level for validation (0 &#x3D; normal, 1 &#x3D; strictest).</value>
+
         [DataMember(Name="strictness", EmitDefaultValue=true)]
+
+
         public StrictnessEnum Strictness { get; set; }
 
         /// <summary>

@@ -20,6 +20,7 @@ using Microservices.Converters;
 
 namespace Microservices.Models
 { 
+    
     /// <summary>
     /// An object containing ages of people associated with the email address.
     /// </summary>
@@ -30,28 +31,40 @@ namespace Microservices.Models
         /// How many years old the person is.
         /// </summary>
         /// <value>How many years old the person is.</value>
+
         [DataMember(Name="human", EmitDefaultValue=true)]
+
+
         public int Human { get; set; }
 
         /// <summary>
         /// Their date of birth in ISO format.
         /// </summary>
         /// <value>Their date of birth in ISO format.</value>
+
         [DataMember(Name="birthdayIso", EmitDefaultValue=true)]
+
+
         public DateTime BirthdayIso { get; set; }
 
         /// <summary>
         /// Their birthday in timestamp format.
         /// </summary>
         /// <value>Their birthday in timestamp format.</value>
+
         [DataMember(Name="birthdayTimestamp", EmitDefaultValue=true)]
+
+
         public int BirthdayTimestamp { get; set; }
 
         /// <summary>
         /// Whether we are certain the birthdate is correct.
         /// </summary>
         /// <value>Whether we are certain the birthdate is correct.</value>
+
         [DataMember(Name="birthdateCertainty", EmitDefaultValue=true)]
+
+
         public bool BirthdateCertainty { get; set; }
 
         /// <summary>

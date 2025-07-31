@@ -20,6 +20,7 @@ using Microservices.Converters;
 
 namespace Microservices.Models
 { 
+    
     /// <summary>
     /// An object containing phone numbers associated with the email address.
     /// </summary>
@@ -30,14 +31,20 @@ namespace Microservices.Models
         /// The full phone number, including country code.
         /// </summary>
         /// <value>The full phone number, including country code.</value>
+
         [DataMember(Name="formattedPhoneNumber", EmitDefaultValue=false)]
+
+
         public string FormattedPhoneNumber { get; set; }
 
         /// <summary>
         /// The country associated with the phone number.
         /// </summary>
         /// <value>The country associated with the phone number.</value>
+
         [DataMember(Name="country", EmitDefaultValue=false)]
+
+
         public string Country { get; set; }
 
         /// <summary>

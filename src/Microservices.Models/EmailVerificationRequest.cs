@@ -20,6 +20,7 @@ using Microservices.Converters;
 
 namespace Microservices.Models
 { 
+    
     /// <summary>
     /// 
     /// </summary>
@@ -30,9 +31,13 @@ namespace Microservices.Models
         /// Email address to be verified.
         /// </summary>
         /// <value>Email address to be verified.</value>
+        /* <example>example@example.com</example> */
         [Required]
         [DataMember(Name="email", EmitDefaultValue=false)]
-        public string Email { get; set; }
+
+        [DefaultValue("example@example.com")]
+
+        public string Email { get; set; } = "example@example.com";
 
         /// <summary>
         /// Returns the string presentation of the object
